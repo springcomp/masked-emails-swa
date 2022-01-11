@@ -7,7 +7,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GravatarModule } from 'ngx-gravatar';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 //Import material module
@@ -38,6 +38,16 @@ import { MessageContentViewComponent } from './messages/message-content-view/mes
 import { MessagesTableMobileViewComponent } from './messages/messages-table-mobile-view/messages-table-mobile-view.component';
 import { MessagesTableViewComponent } from './messages/messages-table-view/messages-table-view.component';
 
+import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
+import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
+import { MockedHttpRequestInterceptor } from './shared/interceptors/mocked-http.interceptor';
+import { HttpRequestInterceptor } from './shared/interceptors/http.interceptor';
+
+import { environment } from '../environments/environment';
+
+export const isMocked = environment.mocked;
+console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
+
 @NgModule({
   declarations: [
     AddressesComponent,
@@ -63,7 +73,7 @@ import { MessagesTableViewComponent } from './messages/messages-table-view/messa
     MessageContentMobileViewComponent,
     MessageContentViewComponent,
     MessagesTableMobileViewComponent,
-    MessagesTableViewComponent,
+    MessagesTableViewComponent
   ],
   imports: [
     AppRoutingModule,
@@ -78,7 +88,14 @@ import { MessagesTableViewComponent } from './messages/messages-table-view/messa
     ReactiveFormsModule,
   ],
   providers: [
+    MockedHttpProfileInterceptor,
+    MockedHttpAddressInterceptor,
     AuthorizationGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: isMocked ? MockedHttpRequestInterceptor : HttpRequestInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

@@ -38,13 +38,13 @@ The storage account hosts a storage queue names `commands` that is used to commu
 
 Use the following commands to initialize those configuration parameters:
 
-```
+```sh
 > dotnet user-secrets set "TableStorage:ConnectionString" "<connection-string>"
 ```
 
 The project comes with sample data that you must seed using the following command:
 
-```
+```sh
 > cd /src/seed
 > dotnet run -- /seed
 ```
@@ -53,13 +53,15 @@ This will create the initial CosmosDb database and container, and insert some sa
 
 ## Running locally using Visual Studio Code
 
+> **Note**: The Inbox api is currently not supported when running the app locally. By default, HTTP calls are mocked. Please, update the [`environment.ts`](../angular/client/environments/environment.ts) `mocked` property to `false` to test the backend API locally.
+
 First install the [Static Web Apps CLI](https://azure.github.io/static-web-apps-cli/) CLI tool for local development.
 
 You can also take advantage of Visual Studio Code’s [Azure Static Web Apps](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) extension.
 
 Make sure that the project builds successfully. Then, open the `src/angular/` folder in Visual Studio Code.
 
-```
+```sh
 > cd /src/
 > dotnet build
 > cd /src/angular
@@ -71,15 +73,14 @@ Make sure that the project builds successfully. Then, open the `src/angular/` fo
 
 In Visual Studio Code, open a new Terminal window and run the following command to serve the Angular front-end application:
 
-```
+```sh
 > ng serve
 ```
 
 Open yet another Terminal window and run the following command to run the static web app and API:
 
-```
+```sh
 > swa start http://localhost:4200 --api-location ../api
 ```
 
 You can then browse to the static web app at the following address `http://localhost:4280`.
-

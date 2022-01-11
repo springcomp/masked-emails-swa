@@ -6,7 +6,8 @@ This repository hosts the main application and API for the "masked emails".
 
 ## Quick Overview
 
-To quickly setup this application, please refer to [the documentation](src/api).
+To quickly setup this application, please refer to [the documentation](src/angular). A more complete example for testing
+the local backend api is also available in [the function app](src/api) folder.
 
 ## Rationale
 
@@ -72,4 +73,5 @@ The front-end communicates with the backend daemon service using an Azure Storag
 ## Getting Started
 
 - Initialize the [CosmosDb database](./src/api) with [seed data](./src/seed).
-- Run the [Azure Static Web App](./src/angular).
+- Run the [Azure Static Web App](./src/angular) locally with mocked HTTP calls or.
+- Run and test the [Azure Static Web App](./src/api) and its backend API locally.

@@ -4,8 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaskedEmail, MaskedEmailRequest, Address } from '../../shared/models/model';
 import { AddressService } from '../../shared/services/address.service';
 import { HashService } from '../../shared/services/hash.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { ClipboardService } from '../../shared/services/clipboard.service';
 @Component({
   selector: 'app-new-masked-email-address-dialog',
   templateUrl: './new-masked-email-address-dialog.component.html',
@@ -27,7 +26,8 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
     private addressService: AddressService,
     private hashService: HashService,
     private formBuilder: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) public data: { addresses: MaskedEmail[] }, private snackBar: MatSnackBar) {
+    private clipboard: ClipboardService,
+    @Inject(MAT_DIALOG_DATA) public data: { addresses: MaskedEmail[] }) {
     this.addressForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: [''],
@@ -78,7 +78,7 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
   }
 
   public closeDialogRefAfterCreate() {
-    this.dialogRef.close({ event: 'Create', data: MaskedEmail.fromAddress(this.addressCreated)});
+    this.dialogRef.close({ event: 'Create', data: MaskedEmail.fromAddress(this.addressCreated) });
   }
 
   private startTimer(callback: Function) {
@@ -94,20 +94,9 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
   }
 
   private copyToClipboard(text: string): void {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = text;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-
-    this.snackBar.open("The generated password has been copied in your clipboard!", 'Undo', {
-      duration: 2000
-    });
+    this.clipboard.copyToClipboard(
+      text,
+      'The generated password has been copied in your clipboard!'
+    );
   }
 }

@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { AddressService } from '../shared/services/address.service';
-import { LoaderService } from '../shared/services/loader.service'
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MediaMatcher } from '@angular/cdk/layout';
+
+import { AddressService } from '../shared/services/address.service';
+import { ClipboardService } from '../shared/services/clipboard.service';
+import { LoaderService } from '../shared/services/loader.service'
+import { MaskedEmail, AddressPages } from '../shared/models/model';
+import { ScrollService } from '../shared/services/scroll.service';
+
 import { NewMaskedEmailAddressDialogComponent } from './new-masked-email-address-dialog/new-masked-email-address-dialog.component'
 import { RemoveMaskedEmailAddressDialogComponent } from './remove-masked-email-address-dialog/remove-masked-email-address-dialog.component'
 import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-address-dialog/update-masked-email-address-dialog.component'
-import { MaskedEmail, AddressPages } from '../shared/models/model';
-import { ScrollService } from '../shared/services/scroll.service';
-import { MediaMatcher } from '@angular/cdk/layout';
+
 import {
   debounceTime,
   distinctUntilChanged
@@ -26,6 +30,7 @@ export class AddressesComponent implements OnInit {
 
   public pageResult: AddressPages;
   public searchValue: string;
+  public diagnostics: string;
 
   public addresses: MaskedEmail[] = [];
   public dataSource: MatTableDataSource<MaskedEmail>;
@@ -45,7 +50,8 @@ export class AddressesComponent implements OnInit {
     private dialog: MatDialog,
     private loaderSvc: LoaderService,
     private scrollService: ScrollService,
-    private media: MediaMatcher
+    private media: MediaMatcher,
+    private clipboard: ClipboardService
   ) {
     this.loaderSvc.startLoading();
     //Search method: wait 400ms after the last event before emitting next event
@@ -105,21 +111,10 @@ export class AddressesComponent implements OnInit {
   }
 
   copyToClipboard(text: string): void {
-    const selBox = document.createElement('textarea');
-    selBox.style.position = 'fixed';
-    selBox.style.left = '0';
-    selBox.style.top = '0';
-    selBox.style.opacity = '0';
-    selBox.value = text;
-    document.body.appendChild(selBox);
-    selBox.focus();
-    selBox.select();
-    document.execCommand('copy');
-    document.body.removeChild(selBox);
-
-    this.snackBar.open("Address successfully copied!", 'Undo', {
-      duration: 2000
-    });
+    this.clipboard.copyToClipboard(
+      text,
+      'Address successfully copied!'
+    );
   }
 
   onToggleChecked($event: { address: MaskedEmail, $event }): void {
@@ -201,6 +196,7 @@ export class AddressesComponent implements OnInit {
     this.dataSource = new MatTableDataSource(data);
 
     this.scrollService.scrollToBottom = false;
+    this.diagnostics = `scrolledToBottom? ${this.scrollService.scrollToBottom.toString()}`;
     this.lock = false;
     this.isSearching = false;
     this.lockAddresses = false;

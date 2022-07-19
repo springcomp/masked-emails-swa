@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddressService } from '../../shared/services/address.service';
 import { HashService } from '../../shared/services/hash.service';
 import { MaskedEmail, UpdateMaskedEmailRequest } from '../../shared/models/model';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { pristineOrminLength } from './pristineOrMinLength.validator';
 
 @Component({
@@ -12,10 +12,10 @@ import { pristineOrminLength } from './pristineOrMinLength.validator';
   styleUrls: ['./update-masked-email-address-dialog.component.scss']
 })
 export class UpdateMaskedEmailAddressDialogComponent {
-  public addressForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    password: new FormControl('')
+  public addressForm = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
+    password: new UntypedFormControl('')
   });
 
   public newAddressName: string;
@@ -30,7 +30,7 @@ export class UpdateMaskedEmailAddressDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { updatingAddress: MaskedEmail },
     private addressService: AddressService,
     private hashService: HashService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: UntypedFormBuilder) {
 
     this.addressForm = this.formBuilder.group({
       name: [this.data.updatingAddress.name, Validators.required],

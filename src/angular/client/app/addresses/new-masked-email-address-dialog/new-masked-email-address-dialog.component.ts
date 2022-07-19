@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaskedEmail, MaskedEmailRequest, Address } from '../../shared/models/model';
 import { AddressService } from '../../shared/services/address.service';
@@ -11,10 +11,10 @@ import { ClipboardService } from '../../shared/services/clipboard.service';
   styleUrls: ['./new-masked-email-address-dialog.component.scss']
 })
 export class NewMaskedEmailAddressDialogComponent implements OnInit {
-  public addressForm = new FormGroup({
-    name: new FormControl(''),
-    description: new FormControl(''),
-    password: new FormControl(''),
+  public addressForm = new UntypedFormGroup({
+    name: new UntypedFormControl(''),
+    description: new UntypedFormControl(''),
+    password: new UntypedFormControl(''),
   });
   public hidePassword: boolean = true;
   public timeLeft: number = 45;
@@ -25,7 +25,7 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<NewMaskedEmailAddressDialogComponent>,
     private addressService: AddressService,
     private hashService: HashService,
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private clipboard: ClipboardService,
     @Inject(MAT_DIALOG_DATA) public data: { addresses: MaskedEmail[] }) {
     this.addressForm = this.formBuilder.group({

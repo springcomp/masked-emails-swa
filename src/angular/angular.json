@@ -99,7 +99,6 @@
       }
     }
   },
-  "defaultProject": "masked-emails",
   "schematics": {
     "@schematics/angular:component": {
       "style": "scss"

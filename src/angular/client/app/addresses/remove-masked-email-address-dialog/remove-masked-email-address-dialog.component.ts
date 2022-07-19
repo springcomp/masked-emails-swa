@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddressService } from '../../shared/services/address.service';
 import { MaskedEmail } from '../../shared/models/model';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-remove-masked-email-address-dialog',
@@ -10,8 +10,8 @@ import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./remove-masked-email-address-dialog.component.scss']
 })
 export class RemoveMaskedEmailAddressDialogComponent {
-  public addressForm = new FormGroup({
-    address: new FormControl(''),
+  public addressForm = new UntypedFormGroup({
+    address: new UntypedFormControl(''),
   });
 
   private removingAddress: MaskedEmail;
@@ -19,7 +19,7 @@ export class RemoveMaskedEmailAddressDialogComponent {
   constructor(public dialogRef: MatDialogRef<RemoveMaskedEmailAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { removingAddress: MaskedEmail },
     private addressService: AddressService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: UntypedFormBuilder) {
 
     this.addressForm = this.formBuilder.group({
       address: [this.data.removingAddress.emailAddress],

@@ -68,3 +68,8 @@ The daemon is available as a Debian package thanks to a continuous integration u
 
 
 The front-end communicates with the backend daemon service using an Azure Storage queue.
+
+## Getting Started
+
+- Initialize the [CosmosDb database](./src/api) with [seed data](./src/seed).
+- Run the [Azure Static Web App](./src/angular).

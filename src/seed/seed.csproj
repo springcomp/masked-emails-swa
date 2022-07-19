@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Azure.Storage.Queues" Version="12.11.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MaskedEmails.Services\MaskedEmails.Services.csproj" />
     <ProjectReference Include="..\CosmosDb.Model\CosmosDb.Model.csproj" />
     <ProjectReference Include="..\CosmosDb.Utils\CosmosDb.Utils.csproj" />
   </ItemGroup>

@@ -3,10 +3,14 @@
 #if DEBUG
 public static class Config
 {
+    public static string GetStorageQueueName()
+        => "commands";
+
     public static IEnumerable<Address> GetAddresses()
     {
         return GetProfiles().SelectMany(p => p.Addresses);
     }
+
     public static IEnumerable<Profile> GetProfiles()
     {
         var subjectIds = new[]

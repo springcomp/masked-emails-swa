@@ -3,8 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AddressService } from '../../shared/services/address.service';
 import { HashService } from '../../shared/services/hash.service';
 import { MaskedEmail, UpdateMaskedEmailRequest } from '../../shared/models/model';
-import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { pristineOrminLength } from './pristineOrMinLength.validator';
+import { CreateOrUpdateMaskedEmailAddressDialogData } from '../CreateOrUpdateMaskedEmailAddressDialogData';
 
 @Component({
   selector: 'app-update-masked-email-address-dialog',
@@ -12,12 +13,7 @@ import { pristineOrminLength } from './pristineOrMinLength.validator';
   styleUrls: ['./update-masked-email-address-dialog.component.scss']
 })
 export class UpdateMaskedEmailAddressDialogComponent {
-  public addressForm = new UntypedFormGroup({
-    name: new UntypedFormControl(''),
-    description: new UntypedFormControl(''),
-    password: new UntypedFormControl('')
-  });
-
+  public addressForm: FormGroup<CreateOrUpdateMaskedEmailAddressDialogData>;
   public newAddressName: string;
   public newAddressDescription: string;
   public newPassword: string;
@@ -30,12 +26,12 @@ export class UpdateMaskedEmailAddressDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { updatingAddress: MaskedEmail },
     private addressService: AddressService,
     private hashService: HashService,
-    private formBuilder: UntypedFormBuilder) {
+    private formBuilder: FormBuilder) {
 
-    this.addressForm = this.formBuilder.group({
-      name: [this.data.updatingAddress.name, Validators.required],
-      description: [this.data.updatingAddress.description],
-      password: ['', [pristineOrminLength(this.minPasswordLength)]]
+    this.addressForm = this.formBuilder.group<CreateOrUpdateMaskedEmailAddressDialogData>({
+      name: new FormControl<string>(this.data.updatingAddress.name, { validators: Validators.required, nonNullable: true }),
+      description: new FormControl<string>(this.data.updatingAddress.description, { nonNullable: false }),
+      password: new FormControl<string>('', { validators: pristineOrminLength(this.minPasswordLength), nonNullable: false }),
     });
 
     this.updatingAddress = this.data.updatingAddress;
@@ -51,12 +47,12 @@ export class UpdateMaskedEmailAddressDialogComponent {
   public update(): void {
 
     console.log(this.addressForm);
-    console.log(this.addressForm.get('name'));
+    console.log(this.addressForm.value.name);
 
-    this.newAddressName = this.addressForm.get('name').value;
-    this.newAddressDescription = this.addressForm.get('description').value;
-    if (this.addressForm.get('password') !== null) {
-      this.newPassword = this.addressForm.get('password').value;
+    this.newAddressName = this.addressForm.value.name;
+    this.newAddressDescription = this.addressForm.value.description;
+    if (this.addressForm.value.password?.length > 0) {
+      this.newPassword = this.addressForm.value.password;
     }
 
     console.log(this.newAddressName);

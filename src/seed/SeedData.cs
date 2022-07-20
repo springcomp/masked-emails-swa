@@ -1,5 +1,8 @@
 ﻿using Azure.Storage.Queues;
+using CosmosDb.Model;
 using CosmosDb.Model.Interop;
+using CosmosDb.Model.Shim;
+using CosmosDb.Utils.Interop;
 using MaskedEmails.Services.Configuration.Extensions;
 
 public static class SeedData
@@ -36,6 +39,16 @@ public static class SeedData
 	{
 #if DEBUG
 		using var scope = serviceProvider.CreateScope();
+
+		var operations = scope.ServiceProvider.GetRequiredService<ICosmosOperations>();
+		await operations.CreateDatabaseIfNotExistsAsync(Constants.DatabaseId);
+
+		var maskedEmailsDb = operations.GetDatabase(Constants.DatabaseId);
+		await operations.CreateContainerIfNotExistsAsync(maskedEmailsDb, Constants.ContainerName, Constants.PartitionKeyPath);
+		await operations.CreateContainerIfNotExistsAsync(maskedEmailsDb, ConstantsShim.ContainerName, ConstantsShim.PartitionKeyPath);
+
+		var shim = operations.GetContainer(maskedEmailsDb, ConstantsShim.ContainerName);
+
 		var context = scope.ServiceProvider.GetRequiredService<ICosmosDbContext>();
 
 		foreach (var profile in Config.GetProfiles())
@@ -43,6 +56,21 @@ public static class SeedData
 			var cosmosProfile = await context.GetProfile(profile.Id);
 			if (cosmosProfile == null)
 			{
+				// insert shim record
+
+				var item = new ProfileShim {
+					Id = profile.EmailAddress,
+					UserId = profile.Id,
+				};
+
+				await operations.CreateOrReplaceItemAsync(
+					shim, 
+					item,
+					item.Id
+					);
+
+				// insert profile record
+
 				cosmosProfile = new CosmosDb.Model.Profile()
 				{
 					Id = profile.Id,
@@ -51,6 +79,9 @@ public static class SeedData
 					ForwardingAddress = profile.ForwardingAddress,
 					CreatedUtc = DateTime.UtcNow,
 				};
+
+				// insert profile addresses
+
 				foreach (var address in profile.Addresses)
 					cosmosProfile.Addresses.Add(new CosmosDb.Model.Address()
 					{

@@ -6,7 +6,7 @@
     <mat-form-field class="full-width">
       <mat-label>Address name</mat-label>
       <input matInput formControlName="name" placeholder="Type address name" required>
-      <mat-error *ngIf="addressForm.invalid">{{getErrorMessage()}}</mat-error>
+      <mat-error *ngIf="addressForm.invalid">{{getErrorMessageForName()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
@@ -21,6 +21,7 @@
         <fa-icon [icon]="hidePassword ?['fas', 'eye-slash'] : ['fas', 'eye']"></fa-icon>
       </button>
       <mat-hint *ngIf="showGeneratedPassword" align="end" class="timer-color">A new password has been generated automatically. Click to display it in the remaining {{timeLeft}} seconds.</mat-hint>
+      <mat-error *ngIf="addressForm.invalid">{{getErrorMessageForPassword()}}</mat-error>
     </mat-form-field>
 
   </form>

@@ -1,19 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MaskedEmail, MaskedEmailRequest, Address } from '../../shared/models/model';
 import { AddressService } from '../../shared/services/address.service';
 import { HashService } from '../../shared/services/hash.service';
 import { ClipboardService } from '../../shared/services/clipboard.service';
-import { CreateOrUpdateMaskedEmailAddressDialogData } from '../CreateOrUpdateMaskedEmailAddressDialogData';
+import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-or-update-masked-email-address-dialog-base.component';
 
 @Component({
   selector: 'app-new-masked-email-address-dialog',
   templateUrl: './new-masked-email-address-dialog.component.html',
   styleUrls: ['./new-masked-email-address-dialog.component.scss']
 })
-export class NewMaskedEmailAddressDialogComponent implements OnInit {
-  public addressForm: FormGroup<CreateOrUpdateMaskedEmailAddressDialogData>;
+export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase implements OnInit {
   public hidePassword: boolean = true;
   public timeLeft: number = 45;
   public interval: NodeJS.Timeout;
@@ -22,16 +21,12 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<NewMaskedEmailAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { addresses: MaskedEmail[] },
+    formBuilder: FormBuilder,
     private addressService: AddressService,
     private hashService: HashService,
-    private formBuilder: FormBuilder,
     private clipboard: ClipboardService) {
 
-    this.addressForm = this.formBuilder.group<CreateOrUpdateMaskedEmailAddressDialogData>({
-      name: new FormControl('', { validators: Validators.required, nonNullable: true }),
-      description: new FormControl('', { nonNullable: false }),
-      password: new FormControl('', { nonNullable: false }),
-    });
+    super(formBuilder);
   }
 
   ngOnInit() {
@@ -55,6 +50,9 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
       const passwordHash = this.hashService.hashPassword(this.addressForm.value.password);
       request.passwordHash = passwordHash;
     }
+
+    console.log(request);
+
     this.addressService.createAddress(request)
       .subscribe(address => {
         this.addressCreated = address;
@@ -68,11 +66,6 @@ export class NewMaskedEmailAddressDialogComponent implements OnInit {
           this.closeDialogRefAfterCreate();
         }
       });
-  }
-
-  public getErrorMessage() {
-    return this.addressForm.get('name').hasError('required') ? 'You must enter a value' :
-      '';
   }
 
   public closeDialogRefAfterCreate() {

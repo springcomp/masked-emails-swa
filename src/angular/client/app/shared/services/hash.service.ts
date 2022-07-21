@@ -83,8 +83,6 @@ export class HashService {
             let i: number
             let l: number = bytes.length;
 
-            console.log(bytes[i - 2]);
-
             for (i = 2; i < l; i += 3) {
                 result += base64abc[bytes[i - 2] >> 2];
                 result += base64abc[((bytes[i - 2] & 0x03) << 4) | (bytes[i - 1] >> 4)];

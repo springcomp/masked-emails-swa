@@ -57,7 +57,9 @@ export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEm
       .subscribe(address => {
         this.addressCreated = address;
         if (this.addressForm.value.password?.length === 0) {
-          this.addressForm.value.password = address.password;
+          this.addressForm.patchValue({
+            password: address.password
+          });
           this.copyToClipboard(address.password);
 
           this.startTimer(() => this.closeDialogRefAfterCreate());

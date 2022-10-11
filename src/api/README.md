@@ -50,3 +50,36 @@ The project comes with sample data that you must seed using the following comman
 ```
 
 This will create the initial CosmosDb database and container, and insert some sample records.
+
+## Running locally using Visual Studio Code
+
+First install the [Static Web Apps CLI](https://azure.github.io/static-web-apps-cli/) CLI tool for local development.
+
+You can also take advantage of Visual Studio Code’s [Azure Static Web Apps](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) extension.
+
+Make sure that the project builds successfully. Then, open the `src/angular/` folder in Visual Studio Code.
+
+```
+> cd /src/
+> dotnet build
+> cd /src/angular
+> npm install
+> npx browserslist --update-db
+> ng build
+> code .
+```
+
+In Visual Studio Code, open a new Terminal window and run the following command to serve the Angular front-end application:
+
+```
+> ng serve
+```
+
+Open yet another Terminal window and run the following command to run the static web app and API:
+
+```
+> swa start http://localhost:4200 --api-location ../api
+```
+
+You can then browse to the static web app at the following address `http://localhost:4280`.
+

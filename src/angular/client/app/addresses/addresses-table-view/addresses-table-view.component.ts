@@ -1,11 +1,32 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule, MatTableDataSource } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { MaskedEmail } from '../../shared/models/model';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
+  standalone: true,
   selector: 'app-addresses-table-view',
   templateUrl: './addresses-table-view.component.html',
-  styleUrls: ['../addresses.component.scss','./addresses-table-view.component.scss']
+  styleUrls: ['../addresses.component.scss','./addresses-table-view.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+  ]
 })
 export class AddressesTableViewComponent implements OnInit {
   @Input() dataSource: MatTableDataSource<MaskedEmail>;

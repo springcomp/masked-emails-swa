@@ -1,9 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { MaskedEmail } from '../../shared/models/model';
-import { MatTableDataSource } from '@angular/material/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 
+import { MatTableDataSource } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTableModule } from '@angular/material/table';
+
+import { MaskedEmail } from '../../shared/models/model';
+
 @Component({
+  standalone: true,
   selector: 'app-addresses-table-mobile-view',
   templateUrl: './addresses-table-mobile-view.component.html',
   styleUrls: ['../addresses.component.scss','./addresses-table-mobile-view.component.scss'],
@@ -13,6 +21,13 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
       state('expanded', style({ height: '*' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ])
+  ],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatTableModule,
   ]
 })
 

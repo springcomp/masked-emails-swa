@@ -29,9 +29,6 @@ import { RemoveMaskedEmailAddressDialogComponent } from './addresses/remove-mask
 import { UpdateMaskedEmailAddressDialogComponent } from './addresses/update-masked-email-address-dialog/update-masked-email-address-dialog.component';
 import { UserButtonComponent } from './app-container/user-button/user-button.component';
 
-import { AddressesTableMobileViewComponent } from './addresses/addresses-table-mobile-view/addresses-table-mobile-view.component';
-import { AddressesTableViewComponent } from './addresses/addresses-table-view/addresses-table-view.component';
-
 import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
 import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
 import { MockedHttpMessagesInterceptor } from './shared/interceptors/mocked-http-messages.interceptor';
@@ -46,7 +43,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 
 @NgModule({
   declarations: [
-    AddressesComponent,
     AppComponent,
     AppContainerComponent,
     EditForwardingAddressComponent,
@@ -62,10 +58,10 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     RemoveMaskedEmailAddressDialogComponent,
     UpdateMaskedEmailAddressDialogComponent,
 
-    AddressesTableMobileViewComponent,
-    AddressesTableViewComponent,
   ],
   imports: [
+    AddressesComponent,
+
     AppRoutingModule,
 
     MessagesComponent,

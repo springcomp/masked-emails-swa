@@ -1,8 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 import { AddressService } from '../shared/services/address.service';
 import { ClipboardService } from '../shared/services/clipboard.service';
@@ -14,6 +21,9 @@ import { NewMaskedEmailAddressDialogComponent } from './new-masked-email-address
 import { RemoveMaskedEmailAddressDialogComponent } from './remove-masked-email-address-dialog/remove-masked-email-address-dialog.component'
 import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-address-dialog/update-masked-email-address-dialog.component'
 
+import { AddressesTableViewComponent } from './addresses-table-view/addresses-table-view.component'
+import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view/addresses-table-mobile-view.component'
+
 import {
   debounceTime,
   distinctUntilChanged
@@ -21,9 +31,20 @@ import {
 import { Subject } from 'rxjs';
 
 @Component({
+  standalone: true,
   selector: 'app-addresses',
   templateUrl: './addresses.component.html',
-  styleUrls: ['./addresses.component.scss']
+  styleUrls: ['./addresses.component.scss'],
+  imports: [
+    AddressesTableViewComponent,
+    AddressesTableMobileViewComponent,
+    CommonModule,
+    FontAwesomeModule,
+    FormsModule,
+    MatButtonModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+  ]
 })
 
 export class AddressesComponent implements OnInit {

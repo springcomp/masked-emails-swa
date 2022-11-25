@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @import '../../../custom-theme.scss';
-.mat-table {
+.mat-mdc-table {
   padding-top: 64px;
   background-color: mat.get-color-from-palette($background-color);
   padding-bottom: 15px;
@@ -11,8 +11,8 @@ tr.detail-row {
   height: 0;
 }
 
-tr.mat-row {
-  .mat-cell {
+tr.mat-mdc-row {
+  .mat-mdc-cell {
     padding-left: 10px;
     padding-right: 10px;
   }

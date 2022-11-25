@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @import '../../../custom-theme.scss';
 
-.mat-table {
+.mat-mdc-table {
   background-color: mat.get-color-from-palette($background-color);
   width: 100%;
 }
@@ -11,8 +11,8 @@ tr.detail-row {
   height: 0;
 }
 
-tr.mat-row {
-  .mat-cell {
+tr.mat-mdc-row {
+  .mat-mdc-cell {
     color: mat.get-color-from-palette($accent, lighter);
     font-size: 12px; //Size of the text in the table
     padding-left: 10px;
@@ -20,11 +20,11 @@ tr.mat-row {
   }
 }
 
-.mat-row:nth-child(even) {
+.mat-mdc-row:nth-child(even) {
   background-color: mat.get-color-from-palette($background-color);
 }
 
-.mat-row:nth-child(odd) {
+.mat-mdc-row:nth-child(odd) {
   background-color: mat.get-color-from-palette($background-color, darker);
 }
 

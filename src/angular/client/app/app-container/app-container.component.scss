@@ -33,11 +33,11 @@
   color: mat.get-color-from-palette($warn);
 }
 
-::ng-deep .mat-menu-panel {
+::ng-deep .mat-mdc-menu-panel {
   max-width: 400px !important;
 }
 
-::ng-deep .user-menu .mat-menu-content .mat-menu-item {
+::ng-deep .user-menu .mat-mdc-menu-content .mat-mdc-menu-item {
   font-size: 13px;
 }
 
@@ -87,7 +87,7 @@
     margin-top: 10px;
   }
 
-  ::ng-deep .mat-button {
+  ::ng-deep .mat-mdc-button {
     min-width: 0 !important;
   }
 

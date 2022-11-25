@@ -1,32 +1,32 @@
 @use '@angular/material' as mat;
 @import '../../../custom-theme.scss';
-.mat-table {
+.mat-mdc-table {
   width: 100%;
 }
 
-tr.mat-row {
-  .mat-cell {
+tr.mat-mdc-row {
+  .mat-mdc-cell {
     color: mat.get-color-from-palette($accent, lighter);
     font-size: 12px; //Size of the text in the table
   }
 }
 
-.mat-row {
+.mat-mdc-row {
   height: 40px; //Table row height
 }
 
-.mat-row:nth-child(even) {
+.mat-mdc-row:nth-child(even) {
   background-color: mat.get-color-from-palette($background-color);
 }
 
-.mat-row:nth-child(odd) {
+.mat-mdc-row:nth-child(odd) {
   background-color: mat.get-color-from-palette($background-color, darker);
 }
 
-tr.mat-header-row {
+tr.mat-mdc-header-row {
   background-color: mat.get-color-from-palette($background-color);
 
-  .mat-header-cell {
+  .mat-mdc-header-cell {
     font-family: Roboto;
     font-size: 15px;
     font-weight: 500;

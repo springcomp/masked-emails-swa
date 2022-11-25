@@ -33,20 +33,20 @@
 }
 
 /*Mat-table common CSS*/
-.mat-table {
+.mat-mdc-table {
   width: 100%;
 }
 
-.mat-row:nth-child(even) {
+.mat-mdc-row:nth-child(even) {
   background-color: mat.get-color-from-palette($background-color);
 }
 
-.mat-row:nth-child(odd) {
+.mat-mdc-row:nth-child(odd) {
   background-color: mat.get-color-from-palette($background-color, darker);
 }
 
-tr.mat-row {
-  .mat-cell {
+tr.mat-mdc-row {
+  .mat-mdc-cell {
     color: mat.get-color-from-palette($accent, lighter);
     font-size: 12px; //Size of the text in the table
   }
@@ -54,7 +54,7 @@ tr.mat-row {
 /*Mat-table common CSS*/
 
 
-::ng-deep .mat-fab {
+::ng-deep .mat-mdc-fab {
   color: #ffffff !important;
   font-size: 16px !important;
 }
@@ -96,18 +96,18 @@ tr.mat-row {
     border-bottom: 1px solid mat.get-color-from-palette($background-color, darker);
   }
 
-  ::ng-deep .mat-fab {
+  ::ng-deep .mat-mdc-fab {
     width: 40px;
     height: 40px;
     margin: auto;
     margin-right: 5px;
   }
-
-  ::ng-deep .mat-fab .mat-button-wrapper {
+  /*TODO(mdc-migration): The following rule targets internal classes of button that may no longer apply for the MDC version.*/
+  ::ng-deep .mat-mdc-fab .mat-button-wrapper {
     padding: 9px 0;
   }
 
-  ::ng-deep .mat-icon-button {
+  ::ng-deep .mat-mdc-icon-button {
     color: mat.get-color-from-palette($primary, darker) !important;
     height: 30px;
     min-width: 0;
@@ -123,7 +123,7 @@ tr.mat-row {
     top: 56px;
   }
 
-  ::ng-deep .mat-icon-button {
+  ::ng-deep .mat-mdc-icon-button {
     height: 20px;
     min-width: 0;
     width: 20px;

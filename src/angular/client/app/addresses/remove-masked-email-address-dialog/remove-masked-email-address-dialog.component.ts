@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
 import { AddressService } from '../../shared/services/address.service';
 import { MaskedEmail } from '../../shared/models/model';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';

@@ -6,26 +6,45 @@
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
-@include mat.core();
+// TODO(v15): As of v15 mat.legacy-core no longer includes default typography styles.
+//  The following line adds:
+//    1. Default typography styles for all components
+//    2. Styles for typography hierarchy classes (e.g. .mat-headline-1)
+//  If you specify typography styles for the components you use elsewhere, you should delete this line.
+//  If you don't need the default component typographies but still want the hierarchy styles,
+//  you can delete this line and instead use:
+//    `@include mat.legacy-typography-hierarchy(mat.define-legacy-typography-config());`
+@include mat.all-legacy-component-typographies();
+@include mat.legacy-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$primary: mat.define-palette(mat.$teal-palette, 300,300, 500);
-$accent: mat.define-palette(mat.$blue-gray-palette, 900,700, 900 );
+$primary: mat.define-palette(mat.$teal-palette, 300, 300, 500);
+$accent: mat.define-palette(mat.$blue-gray-palette, 900, 700, 900 );
 $background-color: mat.define-palette(mat.$gray-palette, 100, 100, 200);
 
-$highlight: mat.define-palette(mat.$teal-palette, 50,50, 50);
+$highlight: mat.define-palette(mat.$teal-palette, 50, 50, 50);
 // The warn palette is optional (defaults to red).
 $warn: mat.define-palette(mat.$deep-orange-palette, 800);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$ClientApp-theme: mat.define-light-theme($primary, $accent, $warn);
+$ClientApp-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
-@include mat.all-component-themes($ClientApp-theme);
+@include mat.all-legacy-component-themes($ClientApp-theme);
 
 
 ::ng-deep .mat-icon-button {

@@ -1,11 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoaderService } from '../shared/services/loader.service';
 import { Subscription } from "rxjs";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
+  standalone: true,
   selector: 'app-loading-screen',
   templateUrl: './loading-screen.component.html',
-  styleUrls: ['./loading-screen.component.scss']
+  styleUrls: ['./loading-screen.component.scss'],
+  imports: [
+    CommonModule,
+    MatProgressSpinnerModule,
+  ]
 })
 export class LoadingScreenComponent implements OnInit, OnDestroy {
   public loading: boolean = false;

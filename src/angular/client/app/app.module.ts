@@ -17,7 +17,6 @@ import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
 import { HomeComponent } from './home/home.component';
 import { InboxComponent } from './inbox/inbox.component';
-import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { LoginComponent } from './login/login.component'
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
 import { MessagesComponent } from './messages/messages.component';
@@ -33,6 +32,7 @@ import { MockedHttpRequestInterceptor } from './shared/interceptors/mocked-http.
 import { HttpRequestInterceptor } from './shared/interceptors/http.interceptor';
 
 import { environment } from '../environments/environment';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 
 export const isMocked = environment.mocked;
 console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
@@ -42,7 +42,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     AppComponent,
     HomeComponent,
     InboxComponent,
-    LoadingScreenComponent,
     LoginComponent,
 
     NewMaskedEmailAddressDialogComponent,
@@ -53,6 +52,8 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
   imports: [
     AppContainerComponent,
     AppRoutingModule,
+
+    LoadingScreenComponent,
 
     MaskedEmailsComponent,
     MessagesComponent,

@@ -2,7 +2,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthorizationGuard } from './core/authorization-guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { CoreModule } from './core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -81,7 +80,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
-    CoreModule,
     FontAwesomeModule,
     FormsModule,
     GravatarModule,

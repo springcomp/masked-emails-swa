@@ -13,7 +13,6 @@ import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
 
 //Components
-import { AddressesComponent } from './addresses/addresses.component';
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
 import { EditForwardingAddressComponent } from './app-container/edit-forwarding-address/edit-forwarding-address.component'
@@ -50,7 +49,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     InboxComponent,
     LoadingScreenComponent,
     LoginComponent,
-    MaskedEmailsComponent,
     UserButtonComponent,
 
     NewMaskedEmailAddressDialogComponent,
@@ -60,10 +58,9 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 
   ],
   imports: [
-    AddressesComponent,
-
     AppRoutingModule,
 
+    MaskedEmailsComponent,
     MessagesComponent,
 
     BrowserAnimationsModule,

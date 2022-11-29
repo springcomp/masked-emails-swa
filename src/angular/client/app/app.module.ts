@@ -15,7 +15,6 @@ import { MaterialModule } from './material.module';
 //Components
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
-import { HomeComponent } from './home/home.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { LoginComponent } from './login/login.component'
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
@@ -40,7 +39,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     InboxComponent,
     LoginComponent,
 

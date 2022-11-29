@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Router } from '@angular/router';
-import { AuthService } from '../core/auth.service'
-
 @Component({
+  standalone: true,
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  imports: []
 })
 export class HomeComponent implements OnInit {
 
   constructor() {
-
   }
 
   ngOnInit() {
-
   }
-
 }

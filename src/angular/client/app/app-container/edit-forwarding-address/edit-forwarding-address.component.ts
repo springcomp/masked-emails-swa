@@ -1,12 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { Profile } from '../../shared/models/model';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 
 @Component({
+  standalone: true,
   selector: 'app-edit-forwarding-address',
   templateUrl: './edit-forwarding-address.component.html',
-  styleUrls: ['./edit-forwarding-address.component.scss']
+  styleUrls: ['./edit-forwarding-address.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatExpansionModule,
+    ProfileDialogComponent,
+  ]
 })
 export class EditForwardingAddressComponent implements OnInit {
   @Input() userIsAuthenticated: boolean;

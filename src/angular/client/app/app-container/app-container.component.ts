@@ -1,14 +1,40 @@
-import { AuthService } from '../core/auth.service';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { Profile } from '../shared/models/model';
-import { ProfileService } from '../shared/services/profile.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { Router } from '@angular/router';
 
+import { GravatarModule } from 'ngx-gravatar';
+
+import { AuthService } from '../core/auth.service';
+import { Profile } from '../shared/models/model';
+import { ProfileService } from '../shared/services/profile.service';
+import { UserButtonComponent } from './user-button/user-button.component';
+import { EditForwardingAddressComponent } from './edit-forwarding-address/edit-forwarding-address.component';
+
 @Component({
+  standalone: true,
   selector: 'app-container',
   templateUrl: './app-container.component.html',
-  styleUrls: ['./app-container.component.scss']
+  styleUrls: ['./app-container.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    GravatarModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    UserButtonComponent,
+    EditForwardingAddressComponent,
+  ]
 })
 export class AppContainerComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;

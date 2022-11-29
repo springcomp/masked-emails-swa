@@ -15,7 +15,6 @@ import { MaterialModule } from './material.module';
 //Components
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
-import { EditForwardingAddressComponent } from './app-container/edit-forwarding-address/edit-forwarding-address.component'
 import { HomeComponent } from './home/home.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
@@ -23,10 +22,8 @@ import { LoginComponent } from './login/login.component'
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewMaskedEmailAddressDialogComponent } from './addresses/new-masked-email-address-dialog/new-masked-email-address-dialog.component';
-import { ProfileDialogComponent } from './app-container/profile-dialog/profile-dialog.component';
 import { RemoveMaskedEmailAddressDialogComponent } from './addresses/remove-masked-email-address-dialog/remove-masked-email-address-dialog.component';
 import { UpdateMaskedEmailAddressDialogComponent } from './addresses/update-masked-email-address-dialog/update-masked-email-address-dialog.component';
-import { UserButtonComponent } from './app-container/user-button/user-button.component';
 
 import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
 import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
@@ -43,21 +40,18 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 @NgModule({
   declarations: [
     AppComponent,
-    AppContainerComponent,
-    EditForwardingAddressComponent,
     HomeComponent,
     InboxComponent,
     LoadingScreenComponent,
     LoginComponent,
-    UserButtonComponent,
 
     NewMaskedEmailAddressDialogComponent,
-    ProfileDialogComponent,
     RemoveMaskedEmailAddressDialogComponent,
     UpdateMaskedEmailAddressDialogComponent,
 
   ],
   imports: [
+    AppContainerComponent,
     AppRoutingModule,
 
     MaskedEmailsComponent,

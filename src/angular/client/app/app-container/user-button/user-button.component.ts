@@ -1,10 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { GravatarModule } from 'ngx-gravatar';
+
 import { Profile } from '../../shared/models/model';
 
 @Component({
+  standalone: true,
   selector: 'app-user-button',
   templateUrl: './user-button.component.html',
-  styleUrls: ['./user-button.component.scss']
+  styleUrls: ['./user-button.component.scss'],
+  imports: [
+    FontAwesomeModule,
+    GravatarModule,
+  ]
 })
 export class UserButtonComponent implements OnInit {
 

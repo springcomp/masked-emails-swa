@@ -40,6 +40,8 @@ import { MessagesTableViewComponent } from './messages/messages-table-view/messa
 
 import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
 import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
+import { MockedHttpMessagesInterceptor } from './shared/interceptors/mocked-http-messages.interceptor';
+import { MockedHttpMessageInterceptor } from './shared/interceptors/mocked-http-message.interceptor';
 import { MockedHttpRequestInterceptor } from './shared/interceptors/mocked-http.interceptor';
 import { HttpRequestInterceptor } from './shared/interceptors/http.interceptor';
 
@@ -90,6 +92,8 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
   providers: [
     MockedHttpProfileInterceptor,
     MockedHttpAddressInterceptor,
+    MockedHttpMessagesInterceptor,
+    MockedHttpMessageInterceptor,
     AuthorizationGuard,
     {
       provide: HTTP_INTERCEPTORS,

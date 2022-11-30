@@ -22,7 +22,6 @@ import { InboxComponent } from './inbox/inbox.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { LoginComponent } from './login/login.component'
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
-import { MessageDialogComponent } from './messages/message-dialog/message-dialog.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewMaskedEmailAddressDialogComponent } from './addresses/new-masked-email-address-dialog/new-masked-email-address-dialog.component';
 import { ProfileDialogComponent } from './app-container/profile-dialog/profile-dialog.component';
@@ -32,10 +31,6 @@ import { UserButtonComponent } from './app-container/user-button/user-button.com
 
 import { AddressesTableMobileViewComponent } from './addresses/addresses-table-mobile-view/addresses-table-mobile-view.component';
 import { AddressesTableViewComponent } from './addresses/addresses-table-view/addresses-table-view.component';
-import { MessageContentMobileViewComponent } from './messages/message-content-mobile-view/message-content-mobile-view.component';
-import { MessageContentViewComponent } from './messages/message-content-view/message-content-view.component';
-import { MessagesTableMobileViewComponent } from './messages/messages-table-mobile-view/messages-table-mobile-view.component';
-import { MessagesTableViewComponent } from './messages/messages-table-view/messages-table-view.component';
 
 import { MockedHttpProfileInterceptor } from './shared/interceptors/mocked-http-profile.interceptor';
 import { MockedHttpAddressInterceptor } from './shared/interceptors/mocked-http-address.interceptor';
@@ -60,10 +55,8 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     LoadingScreenComponent,
     LoginComponent,
     MaskedEmailsComponent,
-    MessagesComponent,
     UserButtonComponent,
 
-    MessageDialogComponent,
     NewMaskedEmailAddressDialogComponent,
     ProfileDialogComponent,
     RemoveMaskedEmailAddressDialogComponent,
@@ -71,13 +64,12 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 
     AddressesTableMobileViewComponent,
     AddressesTableViewComponent,
-    MessageContentMobileViewComponent,
-    MessageContentViewComponent,
-    MessagesTableMobileViewComponent,
-    MessagesTableViewComponent
   ],
   imports: [
     AppRoutingModule,
+
+    MessagesComponent,
+
     BrowserAnimationsModule,
     BrowserModule,
     FontAwesomeModule,

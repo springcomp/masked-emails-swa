@@ -1,15 +1,30 @@
 import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
-import { InboxService } from '../shared/services/inbox.service';
-import { LoaderService } from '../shared/services/loader.service';
-import { MessageSpec, Message } from '../shared/models/model';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SelectionModel } from '@angular/cdk/collections';
 
+import { InboxService } from '../shared/services/inbox.service';
+import { LoaderService } from '../shared/services/loader.service';
+import { MessageSpec, Message } from '../shared/models/model';
+
+import { MessageContentMobileViewComponent } from './message-content-mobile-view/message-content-mobile-view.component';
+import { MessagesTableMobileViewComponent } from './messages-table-mobile-view/messages-table-mobile-view.component';
+import { MessagesTableViewComponent } from './messages-table-view/messages-table-view.component';
+import { MessageContentViewComponent } from './message-content-view/message-content-view.component';
+
 @Component({
+  standalone: true,
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  styleUrls: ['./messages.component.scss'],
+  imports: [
+    MatSidenavModule,
+    MessageContentMobileViewComponent,
+    MessageContentViewComponent,
+    MessagesTableMobileViewComponent,
+    MessagesTableViewComponent,
+  ]
 })
 export class MessagesComponent implements OnInit, OnDestroy {
   public selection = new SelectionModel<MessageSpec>(true, []);

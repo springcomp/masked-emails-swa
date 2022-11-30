@@ -1,10 +1,23 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 import { MessageSpec, Message } from '../../shared/models/model';
 
 @Component({
+  standalone: true,
   selector: 'app-message-content-mobile-view',
   templateUrl: './message-content-mobile-view.component.html',
-  styleUrls: ['./message-content-mobile-view.component.scss']
+  styleUrls: ['./message-content-mobile-view.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+  ]
 })
 export class MessageContentMobileViewComponent implements OnInit {
   @Input() messageSpec: MessageSpec;

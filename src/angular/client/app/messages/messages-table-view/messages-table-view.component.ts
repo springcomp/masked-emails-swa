@@ -1,12 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { MessageSpec } from '../../shared/models/model';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { SelectionModel } from '@angular/cdk/collections';
 
+import { MessageSpec } from '../../shared/models/model';
+
 @Component({
+  standalone: true,
   selector: 'app-messages-table-view',
   templateUrl: './messages-table-view.component.html',
-  styleUrls: ['../messages.component.scss', './messages-table-view.component.scss']
+  styleUrls: ['../messages.component.scss', './messages-table-view.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    MatButtonModule,
+    MatTableModule,
+  ]
 })
 export class MessagesTableViewComponent implements OnInit {
   @Input() dataSource: MatTableDataSource<MessageSpec>;

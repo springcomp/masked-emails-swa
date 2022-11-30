@@ -15,7 +15,6 @@ import { MaterialModule } from './material.module';
 //Components
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
-import { InboxComponent } from './inbox/inbox.component';
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewMaskedEmailAddressDialogComponent } from './addresses/new-masked-email-address-dialog/new-masked-email-address-dialog.component';
@@ -38,7 +37,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 @NgModule({
   declarations: [
     AppComponent,
-    InboxComponent,
 
     NewMaskedEmailAddressDialogComponent,
     RemoveMaskedEmailAddressDialogComponent,

@@ -3,9 +3,11 @@ import { AuthService } from '../core/auth.service';
 import { LoaderService } from '../shared/services/loader.service';
 
 @Component({
+  standalone: true,
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  imports: [ ]
 })
 export class LoginComponent implements OnInit {
 

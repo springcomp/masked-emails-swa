@@ -37,11 +37,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 @NgModule({
   declarations: [
     AppComponent,
-
-    NewMaskedEmailAddressDialogComponent,
-    RemoveMaskedEmailAddressDialogComponent,
-    UpdateMaskedEmailAddressDialogComponent,
-
   ],
   imports: [
     AppContainerComponent,
@@ -51,6 +46,10 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 
     MaskedEmailsComponent,
     MessagesComponent,
+
+    NewMaskedEmailAddressDialogComponent,
+    RemoveMaskedEmailAddressDialogComponent,
+    UpdateMaskedEmailAddressDialogComponent,
 
     BrowserAnimationsModule,
     BrowserModule,

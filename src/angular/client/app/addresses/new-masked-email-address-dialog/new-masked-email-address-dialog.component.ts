@@ -1,6 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import { MaskedEmail, MaskedEmailRequest, Address } from '../../shared/models/model';
 import { AddressService } from '../../shared/services/address.service';
 import { HashService } from '../../shared/services/hash.service';
@@ -8,9 +14,18 @@ import { ClipboardService } from '../../shared/services/clipboard.service';
 import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-or-update-masked-email-address-dialog-base.component';
 
 @Component({
+  standalone: true,
   selector: 'app-new-masked-email-address-dialog',
   templateUrl: './new-masked-email-address-dialog.component.html',
-  styleUrls: ['./new-masked-email-address-dialog.component.scss']
+  styleUrls: ['./new-masked-email-address-dialog.component.scss'],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+  ]
 })
 export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase implements OnInit {
   public hidePassword: boolean = true;

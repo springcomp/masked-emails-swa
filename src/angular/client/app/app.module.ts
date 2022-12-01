@@ -11,7 +11,6 @@ import { NgModule } from '@angular/core';
 
 //Components
 import { AppComponent } from './app.component';
-import { AppContainerComponent } from './app-container/app-container.component';
 import { MaskedEmailsComponent } from './masked-emails/masked-emails.component';
 import { MessagesComponent } from './messages/messages.component';
 import { NewMaskedEmailAddressDialogComponent } from './addresses/new-masked-email-address-dialog/new-masked-email-address-dialog.component';
@@ -32,11 +31,9 @@ export const isMocked = environment.mocked;
 console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [],
   imports: [
-    AppContainerComponent,
+    AppComponent,
     AppRoutingModule,
 
     LoadingScreenComponent,

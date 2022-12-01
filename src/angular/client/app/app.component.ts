@@ -1,12 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { MatDialogModule } from '@angular/material/dialog';
+
+import { RouterModule } from '@angular/router';
+
 import { AuthService } from './core/auth.service'
 import { LoaderService } from './shared/services/loader.service';
 import { ScrollService } from './shared/services/scroll.service';
 
+import { AppContainerComponent } from './app-container/app-container.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+
 @Component({
+  standalone: true,
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    RouterModule,
+    AppContainerComponent,
+    LoadingScreenComponent,
+  ]
 })
 export class AppComponent {
   @ViewChild('scrollMe', { static: true }) private myScrollContainer: ElementRef;

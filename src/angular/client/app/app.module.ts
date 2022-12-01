@@ -9,9 +9,6 @@ import { GravatarModule } from 'ngx-gravatar';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-//Import material module
-import { MaterialModule } from './material.module';
-
 //Components
 import { AppComponent } from './app.component';
 import { AppContainerComponent } from './app-container/app-container.component';
@@ -57,7 +54,6 @@ console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
     FormsModule,
     GravatarModule,
     HttpClientModule,
-    MaterialModule,
     ReactiveFormsModule,
   ],
   providers: [

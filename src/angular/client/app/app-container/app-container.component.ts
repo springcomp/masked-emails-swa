@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
@@ -46,8 +48,10 @@ export class AppContainerComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     public authService: AuthService,
-    public router: Router
+    public router: Router,
+    library: FaIconLibrary
   ) {
+    library.addIconPacks(fas);
   }
 
   async ngOnInit(){

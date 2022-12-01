@@ -1,0 +1,63 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ng serve",
+      "type": "npm",
+      "script": "start",
+      "isBackground": true,
+      "options": {
+        "cwd": "${workspaceFolder}/angular/client"
+      },
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": ".",
+            "endsPattern": "√ Compiled successfully\\."
+          }
+        }
+      ]
+    },
+    {
+      "label": "swa",
+      "type": "shell",
+      "isBackground": true,
+      "command": "swa",
+      "args": [
+        "start",
+        "http://localhost:4200",
+        "--api-location",
+        "${workspaceFolder}/api"
+      ],
+      "problemMatcher": [
+        {
+          "pattern": [
+            {
+              "regexp": ".",
+              "file": 1,
+              "location": 2,
+              "message": 3
+            }
+          ],
+          "background": {
+            "activeOnStart": true,
+            "beginsPattern": "Welcome to Azure Static Web Apps CLI",
+            "endsPattern": "\\[swa\\] Azure Static Web Apps emulator started at http://localhost:4280\\. Press CTRL\\+C to exit\\."
+          }
+        }
+      ],
+      "dependsOn": [
+        "ng serve"
+      ]
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 import { fakeAsync, TestBed } from "@angular/core/testing";
 import { HashService } from './hash.service';
 import { RandomService, MockRandomService } from './random.service';
-import { when } from 'q';
 
 beforeEach(() => {
     TestBed.configureTestingModule({

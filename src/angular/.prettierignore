@@ -1,0 +1,10 @@
+# Ignore artifacts:
+
+*\.json
+*\.md
+
+.angular/
+.vscode/
+assets/
+dist/
+node_modules/

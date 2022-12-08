@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,7 +9,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 import { AddressService } from '@/services';
 import { ClipboardService } from '@/services';
@@ -23,9 +27,6 @@ import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-a
 
 import { AddressesTableViewComponent } from './addresses-table-view/addresses-table-view.component';
 import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view/addresses-table-mobile-view.component';
-
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Subject } from 'rxjs';
 
 @Component({
   standalone: true,
@@ -43,7 +44,7 @@ import { Subject } from 'rxjs';
     MatProgressSpinnerModule,
   ],
 })
-export class AddressesComponent implements OnInit {
+export class AddressesComponent implements OnInit, OnDestroy {
   public pageResult?: AddressPages;
   public searchValue: string;
   public diagnostics: string;
@@ -132,7 +133,10 @@ export class AddressesComponent implements OnInit {
     this.clipboard.copyToClipboard(text, 'Address successfully copied!');
   }
 
-  onToggleChecked($event: { address: MaskedEmail; $event }): void {
+  onToggleChecked($event: {
+    address: MaskedEmail;
+    $event: MatSlideToggleChange;
+  }): void {
     this.addressService
       .toggleAddressForwarding($event.address.emailAddress)
       .subscribe((_) => {
@@ -194,7 +198,7 @@ export class AddressesComponent implements OnInit {
   }
 
   private loadAddresses(): void {
-    var queries = this.setQueries();
+    const queries = this.setQueries();
     if (!this.lockAddresses) {
       this.lockAddresses = true;
       if (queries.search) {
@@ -266,7 +270,7 @@ export class AddressesComponent implements OnInit {
   }
 
   private setNumberOfDataDisplayed() {
-    let mobileQuery = this.media.matchMedia('(max-width: 768px)');
+    const mobileQuery = this.media.matchMedia('(max-width: 768px)');
     let headerHeight = 0;
     let rowHeight = 0;
 
@@ -278,10 +282,10 @@ export class AddressesComponent implements OnInit {
       rowHeight = 40;
     }
 
-    let availableHeight = window.innerHeight - headerHeight;
+    const availableHeight = window.innerHeight - headerHeight;
 
-    let possibleNumberOfRow = availableHeight / rowHeight;
-    let row = Math.round(possibleNumberOfRow);
+    const possibleNumberOfRow = availableHeight / rowHeight;
+    const row = Math.round(possibleNumberOfRow);
     this.numberOfRow = row + 1;
     this.loaderSvc.startLoading();
 

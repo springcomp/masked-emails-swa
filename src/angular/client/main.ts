@@ -94,6 +94,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-bootstrapApplication(AppComponent, { providers })
-  .then(() => {})
-  .catch((err) => console.log(err));
+bootstrapApplication(AppComponent, { providers }).catch((err) =>
+  console.log(err)
+);

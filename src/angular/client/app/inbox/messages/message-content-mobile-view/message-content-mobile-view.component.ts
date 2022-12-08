@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -19,21 +19,17 @@ import { MessageSpec, Message } from '@/models';
     MatProgressSpinnerModule,
   ],
 })
-export class MessageContentMobileViewComponent implements OnInit {
+export class MessageContentMobileViewComponent {
   @Input() messageSpec: MessageSpec;
   @Input() messageContent: Message;
   @Input() loadingMessage: boolean;
 
   @Output() closeSidenav = new EventEmitter();
 
-  constructor() {}
-
-  ngOnInit() {}
-
   public getMessageBody(): string {
     if (this.messageContent != null) {
-      var html = this.messageContent.htmlBody;
-      var text = this.messageContent.textBody;
+      const html = this.messageContent.htmlBody;
+      const text = this.messageContent.textBody;
 
       if (html) {
         return html;

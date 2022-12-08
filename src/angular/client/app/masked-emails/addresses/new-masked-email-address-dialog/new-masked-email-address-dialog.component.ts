@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -31,14 +31,11 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
     MatInputModule,
   ],
 })
-export class NewMaskedEmailAddressDialogComponent
-  extends CreateOrUpdateMaskedEmailAddressDialogComponentBase
-  implements OnInit
-{
-  public hidePassword: boolean = true;
-  public timeLeft: number = 45;
+export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase {
+  public hidePassword = true;
+  public timeLeft = 45;
   public interval: NodeJS.Timeout;
-  public showGeneratedPassword: boolean = false;
+  public showGeneratedPassword = false;
   public addressCreated: Address;
 
   constructor(
@@ -52,8 +49,6 @@ export class NewMaskedEmailAddressDialogComponent
     super(formBuilder);
   }
 
-  ngOnInit() {}
-
   public close(): void {
     this.dialogRef.close();
   }
@@ -63,9 +58,9 @@ export class NewMaskedEmailAddressDialogComponent
   }
 
   public createAddress(): void {
-    var request: MaskedEmailRequest = {
+    const request: MaskedEmailRequest = {
       name: this.addressForm.value.name!,
-      description: this.addressForm.value.description ?? undefined,
+      description: this.addressForm.value.description,
       forwardingEnabled: true,
     };
     if (this.addressForm.value.password?.length ?? 0 > 0) {
@@ -83,11 +78,11 @@ export class NewMaskedEmailAddressDialogComponent
         // user did not specify a password
         // so we fill in the automatically generated
         // password from the api response
-        if (address.password != null && address.password != undefined) {
+        if (address.password) {
           this.addressForm.patchValue({
-            password: address.password,
+            password: address.password!,
           });
-          this.copyToClipboard(address.password);
+          this.copyToClipboard(address.password!);
         }
 
         this.startTimer(() => this.closeDialogRefAfterCreate());
@@ -104,7 +99,7 @@ export class NewMaskedEmailAddressDialogComponent
     });
   }
 
-  private startTimer(callback: Function) {
+  private startTimer(callback: () => void) {
     this.showGeneratedPassword = true;
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {

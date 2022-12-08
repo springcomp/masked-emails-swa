@@ -44,7 +44,7 @@ import { EditForwardingAddressComponent } from './edit-forwarding-address/edit-f
 export class AppContainerComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
 
-  public isAuthenticated: boolean = false;
+  public isAuthenticated = false;
 
   public my: Profile | undefined = undefined;
 
@@ -58,7 +58,7 @@ export class AppContainerComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.authService.ngOnInit();
+    await this.authService.onInit();
     if (this.authService.getIsAuthorized()) {
       this.isAuthenticated = true;
       this.loadProfile();

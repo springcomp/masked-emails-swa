@@ -6,7 +6,7 @@ import * as sha512 from 'js-sha512';
   providedIn: 'root',
 })
 export class HashService {
-  private salt_chars: string =
+  private salt_chars =
     '$-()@&.,;!?/0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 
   constructor(private randomService: RandomService) {}
@@ -14,14 +14,14 @@ export class HashService {
   public hashPassword(plaintext: string): string {
     const salt = this.randomSalt(4);
 
-    var hash = sha512.sha512.create();
+    const hash = sha512.sha512.create();
     hash.update(plaintext);
     hash.update(salt);
     const hashed = hash.array();
 
     // https://stackoverflow.com/questions/14071463/how-can-i-merge-typedarrays-in-javascript
 
-    var array = new Uint8Array(salt.length + hashed.length);
+    const array = new Uint8Array(salt.length + hashed.length);
     array.set(hashed);
     array.set(salt, hashed.length);
 
@@ -37,8 +37,8 @@ export class HashService {
 
   public randomSalt(length: number): Uint8Array {
     const bytes = this.convertUtf8StringToByteArray(this.salt_chars);
-    var array = new Uint8Array(length);
-    for (var index = 0; index < length; index++) {
+    const array = new Uint8Array(length);
+    for (let index = 0; index < length; index++) {
       array[index] = bytes[this.randomService.getNext(bytes.length)];
     }
     return array;
@@ -46,8 +46,8 @@ export class HashService {
 
   public convertUtf8StringToByteArray(str: string): Uint8Array {
     const utf8 = unescape(encodeURIComponent(str));
-    var array = new Uint8Array(utf8.length);
-    for (var index = 0; index < array.length; index++) {
+    const array = new Uint8Array(utf8.length);
+    for (let index = 0; index < array.length; index++) {
       array[index] = utf8.charCodeAt(index);
     }
     return array;
@@ -57,7 +57,7 @@ export class HashService {
     // https://gist.github.com/enepomnyaschih/72c423f727d395eeaa09697058238727
 
     const base64abc = (() => {
-      let abc: string[] = [],
+      const abc: string[] = [],
         A = 'A'.charCodeAt(0),
         a = 'a'.charCodeAt(0),
         n = '0'.charCodeAt(0);
@@ -76,9 +76,9 @@ export class HashService {
     })();
 
     function bytesToBase64(bytes: Uint8Array) {
-      let result: string = '';
+      let result = '';
       let i: number;
-      let l: number = bytes.length;
+      const l: number = bytes.length;
 
       for (i = 2; i < l; i += 3) {
         result += base64abc[bytes[i - 2] >> 2];

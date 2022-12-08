@@ -12,7 +12,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
   imports: [CommonModule, MatProgressSpinnerModule],
 })
 export class LoadingScreenComponent implements OnInit, OnDestroy {
-  public loading: boolean = false;
+  public loading = false;
   public loadingSubscription: Subscription;
 
   constructor(private loadingScreenService: LoaderService) {}

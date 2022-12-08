@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
@@ -16,12 +16,10 @@ const profile: Profile = {
 
 @Injectable()
 export class MockedHttpProfileInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
-
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<Profile>> {
     console.log(`returning mocked profile for: ${profile.displayName}.`);
     return of(new HttpResponse({ status: 200, body: profile }));
   }

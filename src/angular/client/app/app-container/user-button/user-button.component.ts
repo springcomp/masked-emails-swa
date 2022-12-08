@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GravatarModule } from 'ngx-gravatar';
 
@@ -11,13 +11,9 @@ import { Profile } from '@/models';
   styleUrls: ['./user-button.component.scss'],
   imports: [FontAwesomeModule, GravatarModule],
 })
-export class UserButtonComponent implements OnInit {
+export class UserButtonComponent {
   @Input() icon: string;
   @Input() user: Profile;
-
-  constructor() {}
-
-  ngOnInit() {}
 
   get forwardingAddress(): string {
     return this.user && this.user.forwardingAddress

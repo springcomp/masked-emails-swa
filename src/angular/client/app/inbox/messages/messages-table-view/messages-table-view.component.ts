@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
@@ -19,23 +19,18 @@ import { MessageSpec } from '@/models';
   ],
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
-export class MessagesTableViewComponent implements OnInit {
+export class MessagesTableViewComponent {
   @Input() dataSource: MatTableDataSource<MessageSpec>;
   @Input() selection: SelectionModel<MessageSpec>;
 
   @Output() openMessage = new EventEmitter<MessageSpec>();
 
-  public selectedRowIndex: any = null;
   public displayedColumns: string[] = [
     'received',
     'sender',
     'subject',
     'actions',
   ];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   public showMessage(messageSpec: MessageSpec) {
     this.selection.clear();

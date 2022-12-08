@@ -21,7 +21,7 @@ export class RandomService implements IRandomService {
   providedIn: 'root',
 })
 export class MockRandomService implements IRandomService {
-  private next: number = 0;
+  private next = 0;
   private sequence: number[] = [18, 42, 33, 12, 21, 3, 63, 1, 0];
 
   public getNext(maxValue: number): number {

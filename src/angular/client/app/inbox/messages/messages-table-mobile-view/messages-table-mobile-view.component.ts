@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 
@@ -17,16 +17,12 @@ import { MessageSpec } from '@/models';
   ],
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
-export class MessagesTableMobileViewComponent implements OnInit {
+export class MessagesTableMobileViewComponent {
   @Input() dataSource: MatTableDataSource<MessageSpec>;
 
   @Output() openMessage = new EventEmitter<MessageSpec>();
 
   public mobileColumnsToDisplay: string[] = ['informations', 'actions'];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   public showMessage(messageSpec: MessageSpec) {
     this.openMessage.emit(messageSpec);

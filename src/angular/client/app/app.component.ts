@@ -10,6 +10,7 @@ import { ScrollService } from '@/services';
 
 import { AppContainerComponent } from './app-container/app-container.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { ScrollEvent } from '@/models';
 
 @Component({
   standalone: true,
@@ -35,10 +36,10 @@ export class AppComponent {
     private scrollService: ScrollService
   ) {}
 
-  onScroll($event: any) {
+  onScroll(event: ScrollEvent) {
     if (!this.lock) {
       this.lock = true;
-      this.scrollService.isScrolledToBottom($event);
+      this.scrollService.isScrolledToBottom(event);
 
       setTimeout(() => {
         if (this.scrollService.scrollToBottom)

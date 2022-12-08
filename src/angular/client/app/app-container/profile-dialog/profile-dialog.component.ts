@@ -31,7 +31,7 @@ import { ProfileService } from '@/services';
   ],
 })
 export class ProfileDialogComponent {
-  public newForwardingAddress: string = '';
+  public newForwardingAddress = '';
 
   constructor(
     public dialogRef: MatDialogRef<ProfileDialogComponent>,
@@ -48,7 +48,7 @@ export class ProfileDialogComponent {
   }
 
   private onUpdateForwardingAddress(): void {
-    var profile: Profile = {
+    const profile: Profile = {
       displayName: this.data.profile.displayName,
       forwardingAddress: this.newForwardingAddress,
     };

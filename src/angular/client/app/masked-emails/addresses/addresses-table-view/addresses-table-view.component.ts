@@ -1,9 +1,12 @@
 import { MaskedEmail } from '@/models';
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -29,7 +32,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatToolbarModule,
   ],
 })
-export class AddressesTableViewComponent implements OnInit {
+export class AddressesTableViewComponent {
   @Input() dataSource: MatTableDataSource<MaskedEmail>;
 
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
@@ -45,9 +48,6 @@ export class AddressesTableViewComponent implements OnInit {
     'enabled',
     'actions',
   ];
-  constructor() {}
-
-  ngOnInit() {}
 
   public sorting(sort: { active: string; direction: string }) {
     let sortingMode: string | null = null;
@@ -69,7 +69,7 @@ export class AddressesTableViewComponent implements OnInit {
     this.deleteAddress.emit(address);
   }
 
-  public onToggleChecked(address: MaskedEmail, $event) {
+  public onToggleChecked(address: MaskedEmail, $event: MatSlideToggleChange) {
     this.checkAddress.emit({ address, $event });
   }
 

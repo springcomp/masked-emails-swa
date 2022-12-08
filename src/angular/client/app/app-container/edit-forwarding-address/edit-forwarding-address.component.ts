@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -24,15 +24,13 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
     ProfileDialogComponent,
   ],
 })
-export class EditForwardingAddressComponent implements OnInit {
+export class EditForwardingAddressComponent {
   @Input() userIsAuthenticated: boolean;
   @Input() user: Profile;
 
   @Output() updateUserModel = new EventEmitter<Profile>();
 
   constructor(private dialog: MatDialog) {}
-
-  ngOnInit() {}
 
   public openDialog(): void {
     //Open dialog window to update profile

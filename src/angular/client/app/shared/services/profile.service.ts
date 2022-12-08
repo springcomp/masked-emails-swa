@@ -12,14 +12,14 @@ export class ProfileService {
   constructor(private helpers: HttpService, private http: HttpClient) {}
 
   public getProfile(): Observable<Profile> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri('/api/profiles/my');
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri('/api/profiles/my');
     return this.http.get<Profile>(requestUri, headers);
   }
 
   public updateProfile(profile: Profile): Observable<Profile> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri('/api/profiles/my');
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri('/api/profiles/my');
     return this.http.patch<Profile>(requestUri, profile, headers);
   }
 }

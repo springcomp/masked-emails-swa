@@ -6,16 +6,13 @@ import { Clipboard } from '@angular/cdk/clipboard';
   providedIn: 'root',
 })
 export class ClipboardService {
-  constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {
-    {
-    }
-  }
+  constructor(private clipboard: Clipboard, private snackBar: MatSnackBar) {}
 
   public copyToClipboard(
     text: string,
     notification: string,
-    title: string = 'Undo',
-    duration: number = 2000
+    title = 'Undo',
+    duration = 2000
   ): void {
     this.clipboard.copy(text);
     this.snackBar.open(notification, title, {

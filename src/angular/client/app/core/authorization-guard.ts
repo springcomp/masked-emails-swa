@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  Router,
-  Route,
   CanActivate,
   CanLoad,
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
+  Route,
 } from '@angular/router';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +12,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate, CanLoad {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private authService: AuthService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -27,13 +26,13 @@ export class AuthorizationGuard implements CanActivate, CanLoad {
   }
 
   private checkUser(route?: string): Observable<boolean> {
-    var promise = this.authService.ngOnInit();
+    const promise = this.authService.onInit();
     const observable = from(promise);
     return observable.pipe(
       map(() => {
         const isAuthenticated = this.authService.getIsAuthenticated();
         if (!isAuthenticated) {
-          var redirect: string = '/.auth/login/aad';
+          let redirect = '/.auth/login/aad';
           if (route != null) {
             redirect += `?post_login_redirect_uri=/${route}`;
           }
@@ -43,7 +42,7 @@ export class AuthorizationGuard implements CanActivate, CanLoad {
 
         const isAuthorized = this.authService.getIsAuthorized();
         if (!isAuthorized) {
-          const redirect: string = '/unauthorized';
+          const redirect = '/unauthorized';
           this.authService.navigate(redirect);
           return false;
         }

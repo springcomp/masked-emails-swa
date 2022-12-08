@@ -1,16 +1,16 @@
 import { DOCUMENT } from '@angular/common';
-import { Injectable, OnInit, Inject } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { UserInfo } from '@/models';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnInit {
+export class AuthService {
   public clientPrincipal: UserInfo | undefined;
 
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  async ngOnInit() {
+  async onInit() {
     this.clientPrincipal = await this.getClientPrincipal();
   }
 

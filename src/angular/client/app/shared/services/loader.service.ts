@@ -5,10 +5,8 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class LoaderService {
-  public _loading: boolean = false;
+  public _loading = false;
   public loadingStatus: Subject<boolean> = new Subject();
-
-  constructor() {}
 
   get loading(): boolean {
     return this._loading;

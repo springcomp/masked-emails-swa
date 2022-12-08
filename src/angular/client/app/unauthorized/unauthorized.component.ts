@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./unauthorized.component.scss'],
   imports: [],
 })
-export class UnauthorizedComponent {
-  constructor() {}
-}
+export class UnauthorizedComponent {}

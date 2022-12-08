@@ -26,7 +26,10 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript-eslint/no-unused-vars": ["error", { "args": "none"}],
+        "no-non-null-assertion": "off"
       }
     },
     {

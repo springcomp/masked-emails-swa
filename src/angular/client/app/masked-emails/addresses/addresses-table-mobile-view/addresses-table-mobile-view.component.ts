@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   animate,
@@ -42,7 +42,7 @@ import { MaskedEmail } from '@/models';
     MatTableModule,
   ],
 })
-export class AddressesTableMobileViewComponent implements OnInit {
+export class AddressesTableMobileViewComponent {
   @Input() dataSource: MatTableDataSource<MaskedEmail>;
 
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
@@ -54,10 +54,6 @@ export class AddressesTableMobileViewComponent implements OnInit {
   public expandedElement: MaskedEmail;
 
   public mobileColumnsToDisplay: string[] = ['informations', 'actions'];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   public sorting(sort: { active: string; direction: string }) {
     let sortingMode: string | null = null;

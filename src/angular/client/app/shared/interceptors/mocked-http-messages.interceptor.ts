@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
   HttpHandler,
@@ -7,7 +7,7 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { MessageSpec } from '../models/model';
+import { MessageSpec } from '@/models';
 
 const messages: MessageSpec[] = [
   {
@@ -20,12 +20,10 @@ const messages: MessageSpec[] = [
 
 @Injectable()
 export class MockedHttpMessagesInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
-
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<MessageSpec[]>> {
     console.log('returning mocked inbox message list.');
     return of(new HttpResponse({ status: 200, body: messages }));
   }

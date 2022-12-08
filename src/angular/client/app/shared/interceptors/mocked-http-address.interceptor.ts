@@ -381,14 +381,14 @@ const pages: AddressPages[] = [
 @Injectable()
 export class MockedHttpAddressInterceptor implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<AddressPages>> {
     console.log(req.urlWithParams);
     if (req.urlWithParams.endsWith('/api/profiles/my')) return next.handle(req);
 
-    var match = req.urlWithParams.match(/cursor=(?<cursor>[0-9])$/);
-    var cursor = 0;
+    const match = req.urlWithParams.match(/cursor=(?<cursor>[0-9])$/);
+    let cursor = 0;
     if (match !== null) {
       const { groups } = match;
       if (groups) cursor = parseInt(groups.cursor);

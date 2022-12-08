@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ScrollEvent } from '@/models';
 
 @Injectable({
   providedIn: 'root',
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class ScrollService {
   private _scrollToBottom: boolean;
   constructor() {
-    this.scrollToBottom = false;
+    this._scrollToBottom = false;
   }
 
   get scrollToBottom(): boolean {
@@ -17,18 +18,17 @@ export class ScrollService {
     this._scrollToBottom = value;
   }
 
-  public isScrolledToBottom($event): void {
-    if ($event && $event.target) {
-      const scrolledOffset = Math.ceil(
-        $event.target.offsetHeight + $event.target.scrollTop
-      );
+  public isScrolledToBottom(event: ScrollEvent): void {
+    if (event && event.target) {
+      const target = event.target;
+      const scrolledOffset = Math.ceil(target.offsetHeight + target.scrollTop);
 
-      console.log(`offsetHeight: ${$event.target.offsetHeight}`);
-      console.log(`scrollTop: ${$event.target.scrollTop}`);
-      console.log(`scrollHeight: ${$event.target.scrollHeight}`);
+      console.log(`offsetHeight: ${target.offsetHeight}`);
+      console.log(`scrollTop: ${target.scrollTop}`);
+      console.log(`scrollHeight: ${target.scrollHeight}`);
       console.log(`offsetHeight + scrollTop: ${scrolledOffset}`);
 
-      if (scrolledOffset >= $event.target.scrollHeight) {
+      if (scrolledOffset >= target.scrollHeight) {
         this.scrollToBottom = true;
         return;
       }

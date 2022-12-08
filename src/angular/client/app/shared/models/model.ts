@@ -22,7 +22,7 @@ export class MaskedEmail extends Address {
   forwardingEnabled: boolean;
 
   static fromAddress(address: Address): MaskedEmail {
-    var masked: MaskedEmail = {
+    const masked: MaskedEmail = {
       name: address.name,
       description: address.description,
       emailAddress: address.emailAddress,

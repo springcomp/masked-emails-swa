@@ -57,8 +57,6 @@ export class RemoveMaskedEmailAddressDialogComponent {
     console.log(this.data.removingAddress);
   }
 
-  ngOnInit() {}
-
   public close(): void {
     this.dialogRef.close();
   }

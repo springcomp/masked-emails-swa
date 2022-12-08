@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessagesComponent } from './messages/messages.component';
 
 @Component({
@@ -8,8 +8,4 @@ import { MessagesComponent } from './messages/messages.component';
   styleUrls: ['./inbox.component.scss'],
   imports: [MessagesComponent],
 })
-export class InboxComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class InboxComponent {}

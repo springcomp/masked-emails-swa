@@ -53,16 +53,13 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
     this.updatingAddress = this.data.updatingAddress;
   }
 
-  ngOnInit() {}
-
   public close(): void {
     this.dialogRef.close();
   }
 
   public update(): void {
     this.newAddressName = this.addressForm.value.name!;
-    this.newAddressDescription =
-      this.addressForm.value.description ?? undefined;
+    this.newAddressDescription = this.addressForm.value.description;
     if (this.addressForm.value.password?.length ?? 0 > 0) {
       this.newPassword = this.addressForm.value.password!;
     }

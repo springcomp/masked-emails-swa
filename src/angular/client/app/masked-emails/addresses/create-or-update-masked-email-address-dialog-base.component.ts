@@ -10,7 +10,7 @@ import { pristineOrminLength } from './validators/pristineOrMinLength.validator'
 export class CreateOrUpdateMaskedEmailAddressDialogComponentBase {
   public addressForm: FormGroup<CreateOrUpdateMaskedEmailAddressDialogData>;
 
-  protected minPasswordLength: number = 10;
+  protected minPasswordLength = 10;
 
   constructor(
     protected formBuilder: FormBuilder,

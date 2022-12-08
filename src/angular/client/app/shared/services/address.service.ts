@@ -17,8 +17,8 @@ export class AddressService {
   constructor(private helpers: HttpService, private http: HttpClient) {}
 
   public getAddresses(): Observable<Address[]> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri('/api/profiles/my/addresses');
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri('/api/profiles/my/addresses');
     return this.http.get<Address[]>(requestUri, headers);
   }
 
@@ -27,9 +27,9 @@ export class AddressService {
     cursor?: string,
     sort_by?: string
   ): Observable<AddressPages> {
-    var headers = { headers: this.helpers.getHeaders() };
+    const headers = { headers: this.helpers.getHeaders() };
 
-    var requestUri = this.urlBuilder(
+    const requestUri = this.urlBuilder(
       '/api/profiles/my/address-pages',
       top,
       cursor,
@@ -40,33 +40,33 @@ export class AddressService {
   }
 
   public createAddress(request: MaskedEmailRequest): Observable<Address> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri('/api/profiles/my/addresses');
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri('/api/profiles/my/addresses');
     return this.http.post<Address>(requestUri, request, headers);
   }
 
   public updateAddress(
     email: string,
     request: UpdateMaskedEmailRequest
-  ): Observable<any> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri(
+  ): Observable<unknown> {
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri(
       `/api/profiles/my/addresses/${email}`
     );
     return this.http.patch(requestUri, request, headers);
   }
 
-  public deleteAddress(email: string): Observable<any> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri(
+  public deleteAddress(email: string): Observable<unknown> {
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri(
       `/api/profiles/my/addresses/${email}`
     );
     return this.http.delete(requestUri, headers);
   }
 
-  public toggleAddressForwarding(email: string): Observable<any> {
-    var headers = { headers: this.helpers.getHeaders() };
-    var requestUri = this.helpers.getRequestUri(
+  public toggleAddressForwarding(email: string): Observable<unknown> {
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri(
       `/api/profiles/my/addresses/${email}/enableForwarding`
     );
     return this.http.patch(requestUri, {}, headers);
@@ -78,9 +78,9 @@ export class AddressService {
     contains?: string,
     sort_by?: string
   ): Observable<AddressPages> {
-    var headers = { headers: this.helpers.getHeaders() };
+    const headers = { headers: this.helpers.getHeaders() };
 
-    var requestUri = this.urlBuilder(
+    const requestUri = this.urlBuilder(
       '/api/profiles/my/search',
       top,
       cursor,
@@ -98,7 +98,7 @@ export class AddressService {
     sort_by?: string,
     search?: string
   ): string {
-    var query_params: string[] = [];
+    const query_params: string[] = [];
     if (top) {
       query_params.push('top=' + top);
     }
@@ -117,7 +117,7 @@ export class AddressService {
 
     if (query_params.length === 0) return this.helpers.getRequestUri(url);
 
-    var query_string = query_params.join('&');
+    const query_string = query_params.join('&');
 
     return this.helpers.getRequestUri(url + '?' + query_string);
   }

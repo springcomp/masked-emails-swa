@@ -9,22 +9,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { AppComponent } from './app/app.component';
 
-import { AuthorizationGuard } from './app/core/authorization-guard';
+import { AuthorizationGuard } from '@/core';
 
-import { HttpRequestInterceptor } from './app/shared/interceptors/http.interceptor';
-import { MockedHttpMessageInterceptor } from './app/shared/interceptors/mocked-http-message.interceptor';
-import { MockedHttpAddressInterceptor } from './app/shared/interceptors/mocked-http-address.interceptor';
-import { MockedHttpMessagesInterceptor } from './app/shared/interceptors/mocked-http-messages.interceptor';
-import { MockedHttpProfileInterceptor } from './app/shared/interceptors/mocked-http-profile.interceptor';
-import { MockedHttpRequestInterceptor } from './app/shared/interceptors/mocked-http.interceptor';
+import { HttpRequestInterceptor, MockedHttpRequestInterceptor } from '@/interceptors';
+import { MockedHttpMessageInterceptor, MockedHttpMessagesInterceptor } from '@/interceptors';
+import { MockedHttpProfileInterceptor, MockedHttpAddressInterceptor } from '@/interceptors';
 
-import { HomeComponent } from './app/home/home.component';
-import { InboxComponent } from './app/inbox/inbox.component';
-import { LoginComponent } from './app/login/login.component';
-import { MaskedEmailsComponent } from './app/masked-emails/masked-emails.component';
-import { UnauthorizedComponent } from './app/unauthorized/unauthorized.component';
+import { HomeComponent } from '@/routes/home';
+import { InboxComponent } from '@/routes/inbox';
+import { LoginComponent } from '@/routes/login';
+import { MaskedEmailsComponent } from '@/routes/masked-emails';
+import { UnauthorizedComponent } from '@/routes/unauthorized';
 
-import { environment } from './environments/environment';
+import { environment } from '@/environment';
 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;

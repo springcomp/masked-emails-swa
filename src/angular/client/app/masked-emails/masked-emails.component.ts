@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { AddressesComponent } from '../addresses/addresses.component';
+import { AddressesComponent } from './addresses/addresses.component';
 
 @Component({
   standalone: true,

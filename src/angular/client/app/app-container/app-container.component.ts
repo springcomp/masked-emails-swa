@@ -15,8 +15,8 @@ import { Router } from '@angular/router';
 import { GravatarModule } from 'ngx-gravatar';
 
 import { AuthService } from '../core/auth.service';
-import { Profile } from '../shared/models/model';
-import { ProfileService } from '../shared/services/profile.service';
+import { Profile } from '@/models';
+import { ProfileService } from '@/services';
 import { UserButtonComponent } from './user-button/user-button.component';
 import { EditForwardingAddressComponent } from './edit-forwarding-address/edit-forwarding-address.component';
 

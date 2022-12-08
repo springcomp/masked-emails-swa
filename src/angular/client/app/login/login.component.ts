@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
-import { LoaderService } from '../shared/services/loader.service';
+import { LoaderService } from '@/services';
 
 @Component({
   standalone: true,

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessagesComponent } from '../messages/messages.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @Component({
   standalone: true,

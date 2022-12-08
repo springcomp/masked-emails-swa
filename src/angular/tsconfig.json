@@ -18,6 +18,20 @@
       "es2022",
       "dom"
     ],
+    "paths": {
+      "@/environment": [ "client/environments/environment" ],
+      "@/interceptors": [ "client/app/shared/interceptors" ],
+
+      "@/routes/home": [ "client/app/home" ],
+      "@/routes/login": [ "client/app/login" ],
+      "@/routes/unauthorized": [ "client/app/unauthorized" ],
+      "@/routes/inbox": [ "client/app/inbox" ],
+      "@/routes/masked-emails": [ "client/app/masked-emails" ],
+
+      "@/core": [ "client/app/core" ],
+      "@/models": [ "client/app/shared/models" ],
+      "@/services": [ "client/app/shared/services" ]
+    },    
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

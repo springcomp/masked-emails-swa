@@ -5,8 +5,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
 import { AuthService } from './core/auth.service'
-import { LoaderService } from './shared/services/loader.service';
-import { ScrollService } from './shared/services/scroll.service';
+import { LoaderService } from '@/services';
+import { ScrollService } from '@/services';
 
 import { AppContainerComponent } from './app-container/app-container.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';

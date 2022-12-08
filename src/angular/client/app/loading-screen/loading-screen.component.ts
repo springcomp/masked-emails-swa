@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoaderService } from '../shared/services/loader.service';
+import { LoaderService } from '@/services';
 import { Subscription } from "rxjs";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 

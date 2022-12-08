@@ -1,0 +1,40 @@
+@use '@angular/material' as mat;
+@import '../../../../custom-theme.scss';
+.mat-mdc-table {
+  width: 100%;
+}
+
+tr.mat-mdc-row {
+  .mat-mdc-cell {
+    color: mat.get-color-from-palette($accent, lighter);
+    font-size: 12px; //Size of the text in the table
+  }
+}
+
+.mat-mdc-row {
+  height: 40px; //Table row height
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: mat.get-color-from-palette($background-color);
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: mat.get-color-from-palette($background-color, darker);
+}
+
+tr.mat-mdc-header-row {
+  background-color: mat.get-color-from-palette($background-color);
+
+  .mat-mdc-header-cell {
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 500;
+    color: mat.get-color-from-palette($accent);
+  }
+}
+
+.highlight {
+  background-color: mat.get-color-from-palette( $highlight) !important;
+  font-weight: 500;
+}

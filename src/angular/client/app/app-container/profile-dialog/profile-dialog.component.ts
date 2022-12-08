@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { Profile } from '../../shared/models/model';
-import { ProfileService } from '../../shared/services/profile.service';
+import { Profile } from '@/models';
+import { ProfileService } from '@/services';
 
 @Component({
   standalone: true,

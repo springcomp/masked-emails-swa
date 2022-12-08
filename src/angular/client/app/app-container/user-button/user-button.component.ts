@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { GravatarModule } from 'ngx-gravatar';
 
-import { Profile } from '../../shared/models/model';
+import { Profile } from '@/models';
 
 @Component({
   standalone: true,

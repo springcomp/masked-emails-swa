@@ -7,7 +7,7 @@ import { MatMenuModule } from '@angular/material/menu';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-import { Profile } from '../../shared/models/model';
+import { Profile } from '@/models';
 import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.component';
 
 @Component({

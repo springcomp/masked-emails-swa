@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { HttpService } from './http.service';
 import {
@@ -8,7 +9,6 @@ import {
   MaskedEmailRequest,
   UpdateMaskedEmailRequest,
 } from '../models/model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +24,8 @@ export class AddressService {
 
   public getAddressesPages(
     top: number,
-    cursor: string,
-    sort_by: string
+    cursor?: string,
+    sort_by?: string
   ): Observable<AddressPages> {
     var headers = { headers: this.helpers.getHeaders() };
 
@@ -33,8 +33,7 @@ export class AddressService {
       '/api/profiles/my/address-pages',
       top,
       cursor,
-      sort_by,
-      null
+      sort_by
     );
 
     return this.http.get<AddressPages>(requestUri, headers);
@@ -74,10 +73,10 @@ export class AddressService {
   }
 
   public getSearchedAddresses(
-    top: number,
-    cursor: string,
-    contains: string,
-    sort_by: string
+    top?: number,
+    cursor?: string,
+    contains?: string,
+    sort_by?: string
   ): Observable<AddressPages> {
     var headers = { headers: this.helpers.getHeaders() };
 
@@ -94,10 +93,10 @@ export class AddressService {
 
   private urlBuilder(
     url: string,
-    top: number,
-    cursor: string,
-    sort_by: string,
-    search: string
+    top?: number,
+    cursor?: string,
+    sort_by?: string,
+    search?: string
   ): string {
     var query_params: string[] = [];
     if (top) {

@@ -14,19 +14,16 @@ export class CreateOrUpdateMaskedEmailAddressDialogComponentBase {
 
   constructor(
     protected formBuilder: FormBuilder,
-    name: string | undefined = undefined,
+    name = '',
     description: string | undefined = undefined
   ) {
     this.addressForm =
       this.formBuilder.group<CreateOrUpdateMaskedEmailAddressDialogData>({
-        name: new FormControl(name === undefined ? '' : name, {
+        name: new FormControl(name, {
           validators: Validators.required,
           nonNullable: true,
         }),
-        description: new FormControl(
-          description === undefined ? '' : description,
-          { nonNullable: false }
-        ),
+        description: new FormControl(description ?? '', { nonNullable: false }),
         password: new FormControl('', {
           validators: pristineOrminLength(this.minPasswordLength),
           nonNullable: false,
@@ -35,13 +32,13 @@ export class CreateOrUpdateMaskedEmailAddressDialogComponentBase {
   }
 
   public getErrorMessageForName() {
-    return this.addressForm.get('name').hasError('required')
+    return this.addressForm.get('name')?.hasError('required')
       ? 'You must enter a value'
       : '';
   }
 
   public getErrorMessageForPassword() {
-    return this.addressForm.get('password').hasError('pristineOrMinLength')
+    return this.addressForm.get('password')?.hasError('pristineOrMinLength')
       ? `The password must be at least ${this.minPasswordLength} characters long`
       : '';
   }

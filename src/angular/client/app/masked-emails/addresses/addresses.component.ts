@@ -44,7 +44,7 @@ import { Subject } from 'rxjs';
   ],
 })
 export class AddressesComponent implements OnInit {
-  public pageResult: AddressPages;
+  public pageResult?: AddressPages;
   public searchValue: string;
   public diagnostics: string;
 
@@ -122,7 +122,7 @@ export class AddressesComponent implements OnInit {
   }
 
   sorting(sortValue: string) {
-    this.pageResult = null;
+    this.pageResult = undefined;
     this.sortingMode = sortValue;
 
     this.loadAddresses();
@@ -199,7 +199,12 @@ export class AddressesComponent implements OnInit {
       this.lockAddresses = true;
       if (queries.search) {
         this.addressService
-          .getSearchedAddresses(queries.top, null, queries.search, queries.sort)
+          .getSearchedAddresses(
+            queries.top,
+            undefined,
+            queries.search,
+            queries.sort
+          )
           .subscribe(
             (page) => {
               this.handleDatasourceData(queries.cursor, page);
@@ -219,7 +224,7 @@ export class AddressesComponent implements OnInit {
     }
   }
 
-  private handleDatasourceData(cursor: string, page: AddressPages) {
+  private handleDatasourceData(cursor: string | undefined, page: AddressPages) {
     this.loaderSvc.stopLoading();
     this.pageResult = page;
 
@@ -243,9 +248,11 @@ export class AddressesComponent implements OnInit {
   private setQueries() {
     return {
       top: this.numberOfRow,
-      cursor: this.pageResult ? this.pageResult.cursor : null,
-      sort: this.sortingMode ? this.sortingMode : null,
-      search: this.searchValue ? this.searchValue.trim().toLowerCase() : null,
+      cursor: this.pageResult ? this.pageResult.cursor : undefined,
+      sort: this.sortingMode ? this.sortingMode : undefined,
+      search: this.searchValue
+        ? this.searchValue.trim().toLowerCase()
+        : undefined,
     };
   }
 
@@ -254,7 +261,7 @@ export class AddressesComponent implements OnInit {
   }
 
   private clearDatasource(): void {
-    this.pageResult = null;
+    this.pageResult = undefined;
     if (this.dataSource) this.dataSource.data = [];
   }
 

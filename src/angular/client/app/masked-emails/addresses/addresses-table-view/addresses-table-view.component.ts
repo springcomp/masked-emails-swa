@@ -1,16 +1,14 @@
+import { MaskedEmail } from '@/models';
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
-import { MaskedEmail } from '@/models';
 
 @Component({
   standalone: true,
@@ -52,7 +50,7 @@ export class AddressesTableViewComponent implements OnInit {
   ngOnInit() {}
 
   public sorting(sort: { active: string; direction: string }) {
-    let sortingMode = null;
+    let sortingMode: string | null = null;
     if (sort.direction === '') sortingMode = null;
     else {
       if (sort.direction === 'desc')

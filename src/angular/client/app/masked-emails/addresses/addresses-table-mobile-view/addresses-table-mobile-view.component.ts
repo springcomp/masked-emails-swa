@@ -60,7 +60,7 @@ export class AddressesTableMobileViewComponent implements OnInit {
   ngOnInit() {}
 
   public sorting(sort: { active: string; direction: string }) {
-    let sortingMode = null;
+    let sortingMode: string | null = null;
     if (sort.direction === '') sortingMode = null;
     else {
       if (sort.direction === 'desc')

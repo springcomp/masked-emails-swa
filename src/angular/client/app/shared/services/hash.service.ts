@@ -57,7 +57,7 @@ export class HashService {
     // https://gist.github.com/enepomnyaschih/72c423f727d395eeaa09697058238727
 
     const base64abc = (() => {
-      let abc = [],
+      let abc: string[] = [],
         A = 'A'.charCodeAt(0),
         a = 'a'.charCodeAt(0),
         n = '0'.charCodeAt(0);

@@ -14,11 +14,11 @@ export class ClipboardService {
   public copyToClipboard(
     text: string,
     notification: string,
-    title: string = null,
+    title: string = 'Undo',
     duration: number = 2000
   ): void {
     this.clipboard.copy(text);
-    this.snackBar.open(notification, title ?? 'Undo', {
+    this.snackBar.open(notification, title, {
       duration: duration,
     });
   }

@@ -6,7 +6,7 @@ export class Profile {
 export class AddressPages {
   count: number;
   total: number;
-  cursor: string;
+  cursor?: string;
   addresses: MaskedEmail[];
 }
 
@@ -15,7 +15,7 @@ export class Address {
   description?: string;
   emailAddress: string;
   forwardToEmailAddress?: string;
-  password: string;
+  password?: string;
 }
 
 export class MaskedEmail extends Address {

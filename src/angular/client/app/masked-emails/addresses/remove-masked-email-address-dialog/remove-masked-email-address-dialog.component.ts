@@ -72,7 +72,6 @@ export class RemoveMaskedEmailAddressDialogComponent {
   private onDelete(address: MaskedEmail): void {
     this.addressService.deleteAddress(address.emailAddress).subscribe((_) => {
       this.dialogRef.close({ event: 'Confirm' });
-      this.removingAddress = undefined;
     });
   }
 }

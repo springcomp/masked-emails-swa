@@ -32,8 +32,8 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
 })
 export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase {
   public newAddressName: string;
-  public newAddressDescription: string;
-  public newPassword: string;
+  public newAddressDescription?: string;
+  public newPassword?: string;
 
   private updatingAddress: MaskedEmail;
 
@@ -60,25 +60,25 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
   }
 
   public update(): void {
-    this.newAddressName = this.addressForm.value.name;
-    this.newAddressDescription = this.addressForm.value.description;
-    if (this.addressForm.value.password?.length > 0) {
-      this.newPassword = this.addressForm.value.password;
+    this.newAddressName = this.addressForm.value.name!;
+    this.newAddressDescription =
+      this.addressForm.value.description ?? undefined;
+    if (this.addressForm.value.password?.length ?? 0 > 0) {
+      this.newPassword = this.addressForm.value.password!;
     }
 
     if (
       this.updatingAddress.name !== this.newAddressName ||
       this.updatingAddress.description !== this.newAddressDescription ||
-      this.newPassword.length > 0
+      (this.newPassword?.length ?? 0) > 0
     ) {
       console.log('updating...');
       this.updatingAddress.name = this.newAddressName;
-      this.updatingAddress.description = this.newAddressDescription;
+      this.updatingAddress.description = this.newAddressDescription!;
 
-      this.onUpdate(this.updatingAddress, this.newPassword);
+      this.onUpdate(this.updatingAddress, this.newPassword ?? undefined);
     }
 
-    this.updatingAddress = undefined;
     this.close();
   }
 
@@ -87,8 +87,8 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
       name: address.name,
       description: address.description,
     };
-    if (password != undefined && password?.length > 0) {
-      const passwordHash = this.hashService.hashPassword(password);
+    if (password?.length ?? 0 > 0) {
+      const passwordHash = this.hashService.hashPassword(password!);
       updateRequest.passwordHash = passwordHash;
     }
 

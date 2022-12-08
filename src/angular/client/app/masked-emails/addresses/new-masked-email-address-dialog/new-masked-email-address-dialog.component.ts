@@ -64,13 +64,13 @@ export class NewMaskedEmailAddressDialogComponent
 
   public createAddress(): void {
     var request: MaskedEmailRequest = {
-      name: this.addressForm.value.name,
-      description: this.addressForm.value.description,
+      name: this.addressForm.value.name!,
+      description: this.addressForm.value.description ?? undefined,
       forwardingEnabled: true,
     };
-    if (this.addressForm.value.password?.length > 0) {
+    if (this.addressForm.value.password?.length ?? 0 > 0) {
       const passwordHash = this.hashService.hashPassword(
-        this.addressForm.value.password
+        this.addressForm.value.password!
       );
       request.passwordHash = passwordHash;
     }
@@ -80,10 +80,15 @@ export class NewMaskedEmailAddressDialogComponent
     this.addressService.createAddress(request).subscribe((address) => {
       this.addressCreated = address;
       if (this.addressForm.value.password?.length === 0) {
-        this.addressForm.patchValue({
-          password: address.password,
-        });
-        this.copyToClipboard(address.password);
+        // user did not specify a password
+        // so we fill in the automatically generated
+        // password from the api response
+        if (address.password != null && address.password != undefined) {
+          this.addressForm.patchValue({
+            password: address.password,
+          });
+          this.copyToClipboard(address.password);
+        }
 
         this.startTimer(() => this.closeDialogRefAfterCreate());
       } else {

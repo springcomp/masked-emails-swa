@@ -49,7 +49,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     //Used to modify mat-sidenav mode in mobile mode or desktop mode
     this.mobileQuery = this.media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
+    this.mobileQuery.addEventListener('change', this._mobileQueryListener);
   }
 
   ngOnInit() {
@@ -57,7 +57,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
 
   public getMessageBody(): string {

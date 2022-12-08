@@ -15,7 +15,7 @@ beforeEach(() => {
 
 describe('HashService.hashPassword', () => {
   it('should have a deterministic random generator', () => {
-    const hashService: HashService = TestBed.get(HashService);
+    const hashService: HashService = TestBed.inject(HashService);
     const n = hashService.h();
     expect(n).toBe(18);
   });

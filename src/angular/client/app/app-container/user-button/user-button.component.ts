@@ -9,22 +9,19 @@ import { Profile } from '@/models';
   selector: 'app-user-button',
   templateUrl: './user-button.component.html',
   styleUrls: ['./user-button.component.scss'],
-  imports: [
-    FontAwesomeModule,
-    GravatarModule,
-  ]
+  imports: [FontAwesomeModule, GravatarModule],
 })
 export class UserButtonComponent implements OnInit {
-
   @Input() icon: string;
   @Input() user: Profile;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   get forwardingAddress(): string {
-    return this.user && this.user.forwardingAddress ? this.user.forwardingAddress : '';
+    return this.user && this.user.forwardingAddress
+      ? this.user.forwardingAddress
+      : '';
   }
 }

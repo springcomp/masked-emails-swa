@@ -11,13 +11,11 @@ import { MessageSpec } from '@/models';
   standalone: true,
   selector: 'app-messages-table-mobile-view',
   templateUrl: './messages-table-mobile-view.component.html',
-  styleUrls: ['../messages.component.scss', './messages-table-mobile-view.component.scss'],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    MatButtonModule,
-    MatTableModule,
-  ]
+  styleUrls: [
+    '../messages.component.scss',
+    './messages-table-mobile-view.component.scss',
+  ],
+  imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
 export class MessagesTableMobileViewComponent implements OnInit {
   @Input() dataSource: MatTableDataSource<MessageSpec>;
@@ -26,14 +24,11 @@ export class MessagesTableMobileViewComponent implements OnInit {
 
   public mobileColumnsToDisplay: string[] = ['informations', 'actions'];
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public showMessage(messageSpec: MessageSpec) {
     this.openMessage.emit(messageSpec);
   }
-
 }

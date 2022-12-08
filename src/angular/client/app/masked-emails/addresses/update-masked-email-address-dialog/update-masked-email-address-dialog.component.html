@@ -2,28 +2,51 @@
 
 <div mat-dialog-content class="form-width">
   <form [formGroup]="addressForm">
-
     <mat-form-field class="full-width">
       <mat-label>Address name</mat-label>
-      <input matInput formControlName="name" placeholder="Type address name" required>
-      <mat-error *ngIf="addressForm.invalid">{{getErrorMessageForName()}}</mat-error>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="Type address name"
+        required
+      />
+      <mat-error *ngIf="addressForm.invalid">{{
+        getErrorMessageForName()
+      }}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Address description</mat-label>
-      <textarea matInput formControlName="description" placeholder="Type address description"></textarea>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Type address description"
+      ></textarea>
     </mat-form-field>
 
     <mat-form-field class="full-width">
       <mat-label>Password</mat-label>
-      <input matInput formControlName="password" placeholder="Type a new password" type="password">
-      <mat-error *ngIf="addressForm.invalid">{{getErrorMessageForPassword()}}</mat-error>
+      <input
+        matInput
+        formControlName="password"
+        placeholder="Type a new password"
+        type="password"
+      />
+      <mat-error *ngIf="addressForm.invalid">{{
+        getErrorMessageForPassword()
+      }}</mat-error>
     </mat-form-field>
-
   </form>
 </div>
 
 <div mat-dialog-actions>
-  <button mat-stroked-button color="primary" [disabled]="addressForm.invalid" (click)="update()">Save</button>
+  <button
+    mat-stroked-button
+    color="primary"
+    [disabled]="addressForm.invalid"
+    (click)="update()"
+  >
+    Save
+  </button>
   <button mat-stroked-button (click)="close()">Cancel</button>
 </div>

@@ -24,7 +24,7 @@ import { MessageContentViewComponent } from './message-content-view/message-cont
     MessageContentViewComponent,
     MessagesTableMobileViewComponent,
     MessagesTableViewComponent,
-  ]
+  ],
 })
 export class MessagesComponent implements OnInit, OnDestroy {
   public selection = new SelectionModel<MessageSpec>(true, []);
@@ -50,7 +50,6 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.mobileQuery = this.media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
-
   }
 
   ngOnInit() {
@@ -65,7 +64,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
     if (this.message != null) {
       return this.message.htmlBody;
     }
-    return "";
+    return '';
   }
 
   public showMessage(message: MessageSpec) {
@@ -73,11 +72,10 @@ export class MessagesComponent implements OnInit, OnDestroy {
     this.loadingMessage = true;
     this.messageContent = message;
     const location = message.location;
-    this.inboxService.getMessage(location)
-      .subscribe(msg => {
-        this.message = msg;
-        this.loadingMessage = false;
-      });
+    this.inboxService.getMessage(location).subscribe((msg) => {
+      this.message = msg;
+      this.loadingMessage = false;
+    });
   }
 
   public closeMessageContent() {
@@ -86,16 +84,12 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   private loadMessages(): void {
-    this.inboxService.getMessages()
-      .subscribe(messages => {
-        this.loaderSvc.stopLoading();
-        this.messages = messages;
+    this.inboxService.getMessages().subscribe((messages) => {
+      this.loaderSvc.stopLoading();
+      this.messages = messages;
 
-        // Assign the data to the data source for the table to render
-        this.dataSource = new MatTableDataSource(this.messages);
-
-      });
+      // Assign the data to the data source for the table to render
+      this.dataSource = new MatTableDataSource(this.messages);
+    });
   }
-
-
 }

@@ -35,6 +35,6 @@ tr.mat-mdc-header-row {
 }
 
 .highlight {
-  background-color: mat.get-color-from-palette( $highlight) !important;
+  background-color: mat.get-color-from-palette($highlight) !important;
   font-weight: 500;
 }

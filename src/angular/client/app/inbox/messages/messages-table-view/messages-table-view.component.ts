@@ -13,13 +13,11 @@ import { MessageSpec } from '@/models';
   standalone: true,
   selector: 'app-messages-table-view',
   templateUrl: './messages-table-view.component.html',
-  styleUrls: ['../messages.component.scss', './messages-table-view.component.scss'],
-  imports: [
-    CommonModule,
-    FontAwesomeModule,
-    MatButtonModule,
-    MatTableModule,
-  ]
+  styleUrls: [
+    '../messages.component.scss',
+    './messages-table-view.component.scss',
+  ],
+  imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
 export class MessagesTableViewComponent implements OnInit {
   @Input() dataSource: MatTableDataSource<MessageSpec>;
@@ -28,12 +26,16 @@ export class MessagesTableViewComponent implements OnInit {
   @Output() openMessage = new EventEmitter<MessageSpec>();
 
   public selectedRowIndex: any = null;
-  public displayedColumns: string[] = ['received', 'sender', 'subject', 'actions'];
+  public displayedColumns: string[] = [
+    'received',
+    'sender',
+    'subject',
+    'actions',
+  ];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public showMessage(messageSpec: MessageSpec) {
     this.selection.clear();
@@ -41,5 +43,4 @@ export class MessagesTableViewComponent implements OnInit {
 
     this.openMessage.emit(messageSpec);
   }
-
 }

@@ -4,7 +4,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 import { RouterModule } from '@angular/router';
 
-import { AuthService } from './core/auth.service'
+import { AuthService } from './core/auth.service';
 import { LoaderService } from '@/services';
 import { ScrollService } from '@/services';
 
@@ -22,18 +22,18 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
     RouterModule,
     AppContainerComponent,
     LoadingScreenComponent,
-  ]
+  ],
 })
 export class AppComponent {
-  @ViewChild('scrollMe', { static: true }) private myScrollContainer: ElementRef;
+  @ViewChild('scrollMe', { static: true })
+  private myScrollContainer: ElementRef;
 
   public lock: boolean;
   constructor(
     public authService: AuthService,
     public loaderService: LoaderService,
     private scrollService: ScrollService
-  ) {
-  }
+  ) {}
 
   onScroll($event: any) {
     if (!this.lock) {
@@ -42,7 +42,8 @@ export class AppComponent {
 
       setTimeout(() => {
         if (this.scrollService.scrollToBottom)
-          this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+          this.myScrollContainer.nativeElement.scrollTop =
+            this.myScrollContainer.nativeElement.scrollHeight;
       });
 
       this.lock = false;

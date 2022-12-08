@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -25,27 +29,30 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-  ]
+  ],
 })
-export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase implements OnInit {
+export class NewMaskedEmailAddressDialogComponent
+  extends CreateOrUpdateMaskedEmailAddressDialogComponentBase
+  implements OnInit
+{
   public hidePassword: boolean = true;
   public timeLeft: number = 45;
   public interval: NodeJS.Timeout;
   public showGeneratedPassword: boolean = false;
   public addressCreated: Address;
 
-  constructor(public dialogRef: MatDialogRef<NewMaskedEmailAddressDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<NewMaskedEmailAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { addresses: MaskedEmail[] },
     formBuilder: FormBuilder,
     private addressService: AddressService,
     private hashService: HashService,
-    private clipboard: ClipboardService) {
-
+    private clipboard: ClipboardService
+  ) {
     super(formBuilder);
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public close(): void {
     this.dialogRef.close();
@@ -59,34 +66,37 @@ export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEm
     var request: MaskedEmailRequest = {
       name: this.addressForm.value.name,
       description: this.addressForm.value.description,
-      forwardingEnabled: true
+      forwardingEnabled: true,
     };
     if (this.addressForm.value.password?.length > 0) {
-      const passwordHash = this.hashService.hashPassword(this.addressForm.value.password);
+      const passwordHash = this.hashService.hashPassword(
+        this.addressForm.value.password
+      );
       request.passwordHash = passwordHash;
     }
 
     console.log(request);
 
-    this.addressService.createAddress(request)
-      .subscribe(address => {
-        this.addressCreated = address;
-        if (this.addressForm.value.password?.length === 0) {
-          this.addressForm.patchValue({
-            password: address.password
-          });
-          this.copyToClipboard(address.password);
+    this.addressService.createAddress(request).subscribe((address) => {
+      this.addressCreated = address;
+      if (this.addressForm.value.password?.length === 0) {
+        this.addressForm.patchValue({
+          password: address.password,
+        });
+        this.copyToClipboard(address.password);
 
-          this.startTimer(() => this.closeDialogRefAfterCreate());
-
-        } else {
-          this.closeDialogRefAfterCreate();
-        }
-      });
+        this.startTimer(() => this.closeDialogRefAfterCreate());
+      } else {
+        this.closeDialogRefAfterCreate();
+      }
+    });
   }
 
   public closeDialogRefAfterCreate() {
-    this.dialogRef.close({ event: 'Create', data: MaskedEmail.fromAddress(this.addressCreated) });
+    this.dialogRef.close({
+      event: 'Create',
+      data: MaskedEmail.fromAddress(this.addressCreated),
+    });
   }
 
   private startTimer(callback: Function) {
@@ -98,7 +108,7 @@ export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEm
         this.timeLeft = 45;
         callback();
       }
-    }, 1000)
+    }, 1000);
   }
 
   private copyToClipboard(text: string): void {

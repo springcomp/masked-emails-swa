@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
-import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 import { MatSidenavModule, MatSidenav } from '@angular/material/sidenav';
@@ -36,7 +39,7 @@ import { EditForwardingAddressComponent } from './edit-forwarding-address/edit-f
     MatToolbarModule,
     UserButtonComponent,
     EditForwardingAddressComponent,
-  ]
+  ],
 })
 export class AppContainerComponent implements OnInit {
   @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
@@ -54,13 +57,13 @@ export class AppContainerComponent implements OnInit {
     library.addIconPacks(fas);
   }
 
-  async ngOnInit(){
+  async ngOnInit() {
     await this.authService.ngOnInit();
-    if (this.authService.getIsAuthorized()){
-        this.isAuthenticated = true;
-        this.loadProfile();
+    if (this.authService.getIsAuthorized()) {
+      this.isAuthenticated = true;
+      this.loadProfile();
     }
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event) => {
       // close side nav on routing
       if (this.sidenav && this.sidenav.opened) {
         this.sidenav.close();
@@ -69,7 +72,9 @@ export class AppContainerComponent implements OnInit {
   }
 
   get forwardingAddress(): string {
-    return this.my && this.my.forwardingAddress ? this.my.forwardingAddress : '';
+    return this.my && this.my.forwardingAddress
+      ? this.my.forwardingAddress
+      : '';
   }
 
   get userIsAuthenticated(): boolean {
@@ -97,7 +102,8 @@ export class AppContainerComponent implements OnInit {
   }
 
   private loadProfile(): void {
-    this.profileService.getProfile()
-      .subscribe(profile => this.my = profile);
+    this.profileService
+      .getProfile()
+      .subscribe((profile) => (this.my = profile));
   }
 }

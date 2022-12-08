@@ -22,7 +22,7 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
     MatMenuModule,
     MatExpansionModule,
     ProfileDialogComponent,
-  ]
+  ],
 })
 export class EditForwardingAddressComponent implements OnInit {
   @Input() userIsAuthenticated: boolean;
@@ -30,19 +30,18 @@ export class EditForwardingAddressComponent implements OnInit {
 
   @Output() updateUserModel = new EventEmitter<Profile>();
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public openDialog(): void {
     //Open dialog window to update profile
     const dialogRef = this.dialog.open(ProfileDialogComponent, {
-      data: { profile: this.user }
+      data: { profile: this.user },
     });
 
     //Action to handle after closing the dialog window
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result && result.event == 'UpdateProfile') {
         this.updateUserModel.emit(result.data);
       }

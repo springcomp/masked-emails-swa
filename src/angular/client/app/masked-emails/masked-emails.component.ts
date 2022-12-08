@@ -8,16 +8,10 @@ import { AddressesComponent } from './addresses/addresses.component';
   selector: 'app-masked-emails',
   templateUrl: './masked-emails.component.html',
   styleUrls: ['./masked-emails.component.scss'],
-  imports: [
-    AddressesComponent,
-    MatSnackBarModule,
-  ]
+  imports: [AddressesComponent, MatSnackBarModule],
 })
-
 export class MaskedEmailsComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }

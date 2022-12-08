@@ -13,21 +13,18 @@ import { FormsModule } from '@angular/forms';
 
 import { AddressService } from '@/services';
 import { ClipboardService } from '@/services';
-import { LoaderService } from '@/services'
+import { LoaderService } from '@/services';
 import { MaskedEmail, AddressPages } from '@/models';
 import { ScrollService } from '@/services';
 
-import { NewMaskedEmailAddressDialogComponent } from './new-masked-email-address-dialog/new-masked-email-address-dialog.component'
-import { RemoveMaskedEmailAddressDialogComponent } from './remove-masked-email-address-dialog/remove-masked-email-address-dialog.component'
-import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-address-dialog/update-masked-email-address-dialog.component'
+import { NewMaskedEmailAddressDialogComponent } from './new-masked-email-address-dialog/new-masked-email-address-dialog.component';
+import { RemoveMaskedEmailAddressDialogComponent } from './remove-masked-email-address-dialog/remove-masked-email-address-dialog.component';
+import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-address-dialog/update-masked-email-address-dialog.component';
 
-import { AddressesTableViewComponent } from './addresses-table-view/addresses-table-view.component'
-import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view/addresses-table-mobile-view.component'
+import { AddressesTableViewComponent } from './addresses-table-view/addresses-table-view.component';
+import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view/addresses-table-mobile-view.component';
 
-import {
-  debounceTime,
-  distinctUntilChanged
-} from "rxjs/operators";
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -44,11 +41,9 @@ import { Subject } from 'rxjs';
     MatButtonModule,
     MatInputModule,
     MatProgressSpinnerModule,
-  ]
+  ],
 })
-
 export class AddressesComponent implements OnInit {
-
   public pageResult: AddressPages;
   public searchValue: string;
   public diagnostics: string;
@@ -76,10 +71,9 @@ export class AddressesComponent implements OnInit {
   ) {
     this.loaderSvc.startLoading();
     //Search method: wait 400ms after the last event before emitting next event
-    this.searchChanged.pipe(
-      debounceTime(400),
-      distinctUntilChanged())
-      .subscribe(model => {
+    this.searchChanged
+      .pipe(debounceTime(400), distinctUntilChanged())
+      .subscribe((model) => {
         if (!this.isSearching) {
           this.isSearching = true;
           this.searchValue = model;
@@ -104,7 +98,10 @@ export class AddressesComponent implements OnInit {
     if (!this.lock && this.scrollService.scrollToBottom) {
       this.lock = true;
 
-      if (this.pageResult && this.dataSource.data.length >= this.pageResult.total) {
+      if (
+        this.pageResult &&
+        this.dataSource.data.length >= this.pageResult.total
+      ) {
         this.lock = false;
         return false;
       }
@@ -132,32 +129,41 @@ export class AddressesComponent implements OnInit {
   }
 
   copyToClipboard(text: string): void {
-    this.clipboard.copyToClipboard(
-      text,
-      'Address successfully copied!'
-    );
+    this.clipboard.copyToClipboard(text, 'Address successfully copied!');
   }
 
-  onToggleChecked($event: { address: MaskedEmail, $event }): void {
-    this.addressService.toggleAddressForwarding($event.address.emailAddress)
-      .subscribe(_ => {
+  onToggleChecked($event: { address: MaskedEmail; $event }): void {
+    this.addressService
+      .toggleAddressForwarding($event.address.emailAddress)
+      .subscribe((_) => {
         $event.address.forwardingEnabled = $event.$event.checked;
-        this.snackBar.open(`Successfully ${$event.address.forwardingEnabled ? 'enabled' : 'disabled'} the masked email ${$event.address.emailAddress}.`, 'Undo', {
-          duration: 2000
-        });
+        this.snackBar.open(
+          `Successfully ${
+            $event.address.forwardingEnabled ? 'enabled' : 'disabled'
+          } the masked email ${$event.address.emailAddress}.`,
+          'Undo',
+          {
+            duration: 2000,
+          }
+        );
       });
   }
 
   openRemoveDialog(address: MaskedEmail): void {
-    const dialogRef = this.dialog.open(RemoveMaskedEmailAddressDialogComponent, {
-      data: { removingAddress: address }
-    });
+    const dialogRef = this.dialog.open(
+      RemoveMaskedEmailAddressDialogComponent,
+      {
+        data: { removingAddress: address },
+      }
+    );
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("openRemoveDialog:afterClosed()");
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('openRemoveDialog:afterClosed()');
       console.log(result);
       if (result && result.event == 'Confirm') {
-        this.addresses = this.dataSource.data.filter(a => a.emailAddress !== address.emailAddress);
+        this.addresses = this.dataSource.data.filter(
+          (a) => a.emailAddress !== address.emailAddress
+        );
         this.updateDatasource();
       }
     });
@@ -166,7 +172,7 @@ export class AddressesComponent implements OnInit {
   openCreateDialog(): void {
     const dialogRef = this.dialog.open(NewMaskedEmailAddressDialogComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result && result.event == 'Create') {
         this.clearDatasource();
         this.scrollService.scrollToBottom = true;
@@ -183,7 +189,7 @@ export class AddressesComponent implements OnInit {
 
   openUpdateDialog(address: MaskedEmail): void {
     this.dialog.open(UpdateMaskedEmailAddressDialogComponent, {
-      data: { updatingAddress: address }
+      data: { updatingAddress: address },
     });
   }
 
@@ -192,16 +198,23 @@ export class AddressesComponent implements OnInit {
     if (!this.lockAddresses) {
       this.lockAddresses = true;
       if (queries.search) {
-        this.addressService.getSearchedAddresses(queries.top, null, queries.search, queries.sort).subscribe(page => {
-          this.handleDatasourceData(queries.cursor, page);
-        }, () => {
-            this.isSearching = false;
-            this.lockAddresses = false;
-        });
+        this.addressService
+          .getSearchedAddresses(queries.top, null, queries.search, queries.sort)
+          .subscribe(
+            (page) => {
+              this.handleDatasourceData(queries.cursor, page);
+            },
+            () => {
+              this.isSearching = false;
+              this.lockAddresses = false;
+            }
+          );
       } else {
-        this.addressService.getAddressesPages(queries.top, queries.cursor, queries.sort).subscribe(page => {
-          this.handleDatasourceData(queries.cursor, page);
-        });
+        this.addressService
+          .getAddressesPages(queries.top, queries.cursor, queries.sort)
+          .subscribe((page) => {
+            this.handleDatasourceData(queries.cursor, page);
+          });
       }
     }
   }
@@ -210,9 +223,13 @@ export class AddressesComponent implements OnInit {
     this.loaderSvc.stopLoading();
     this.pageResult = page;
 
-    const data: MaskedEmail[] = this.dataSource && cursor
-      ? [...this.dataSource.data, ...page.addresses.map(a => MaskedEmail.fromAddress(a))]
-      : page.addresses.map(a => MaskedEmail.fromAddress(a));
+    const data: MaskedEmail[] =
+      this.dataSource && cursor
+        ? [
+            ...this.dataSource.data,
+            ...page.addresses.map((a) => MaskedEmail.fromAddress(a)),
+          ]
+        : page.addresses.map((a) => MaskedEmail.fromAddress(a));
     // Assign the data to the data source for the table to render
     this.dataSource = new MatTableDataSource(data);
 
@@ -228,8 +245,8 @@ export class AddressesComponent implements OnInit {
       top: this.numberOfRow,
       cursor: this.pageResult ? this.pageResult.cursor : null,
       sort: this.sortingMode ? this.sortingMode : null,
-      search: this.searchValue ? this.searchValue.trim().toLowerCase() : null
-    }
+      search: this.searchValue ? this.searchValue.trim().toLowerCase() : null,
+    };
   }
 
   private updateDatasource() {
@@ -238,8 +255,7 @@ export class AddressesComponent implements OnInit {
 
   private clearDatasource(): void {
     this.pageResult = null;
-    if (this.dataSource)
-      this.dataSource.data = [];
+    if (this.dataSource) this.dataSource.data = [];
   }
 
   private setNumberOfDataDisplayed() {

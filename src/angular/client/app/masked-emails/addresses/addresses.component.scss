@@ -53,7 +53,6 @@ tr.mat-mdc-row {
 }
 /*Mat-table common CSS*/
 
-
 ::ng-deep .mat-mdc-fab {
   color: #ffffff !important;
   font-size: 16px !important;
@@ -75,7 +74,7 @@ tr.mat-mdc-row {
   color: mat.get-color-from-palette($warn) !important;
 }
 
-@media(max-width:768px) {
+@media (max-width: 768px) {
   .table-view {
     display: none;
   }
@@ -83,7 +82,6 @@ tr.mat-mdc-row {
   .mobile-view {
     display: block;
   }
-
 
   .header-container {
     position: fixed;
@@ -93,7 +91,8 @@ tr.mat-mdc-row {
     right: 15px;
     top: 64px;
     z-index: 100;
-    border-bottom: 1px solid mat.get-color-from-palette($background-color, darker);
+    border-bottom: 1px solid
+      mat.get-color-from-palette($background-color, darker);
   }
 
   ::ng-deep .mat-mdc-fab {
@@ -117,8 +116,7 @@ tr.mat-mdc-row {
   }
 }
 
-@media(max-width:568px) {
-
+@media (max-width: 568px) {
   .header-container {
     top: 56px;
   }

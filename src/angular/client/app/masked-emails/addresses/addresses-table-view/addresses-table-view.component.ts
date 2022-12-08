@@ -16,7 +16,10 @@ import { MaskedEmail } from '@/models';
   standalone: true,
   selector: 'app-addresses-table-view',
   templateUrl: './addresses-table-view.component.html',
-  styleUrls: ['../addresses.component.scss','./addresses-table-view.component.scss'],
+  styleUrls: [
+    '../addresses.component.scss',
+    './addresses-table-view.component.scss',
+  ],
   imports: [
     CommonModule,
     FontAwesomeModule,
@@ -26,7 +29,7 @@ import { MaskedEmail } from '@/models';
     MatSortModule,
     MatTableModule,
     MatToolbarModule,
-  ]
+  ],
 })
 export class AddressesTableViewComponent implements OnInit {
   @Input() dataSource: MatTableDataSource<MaskedEmail>;
@@ -37,21 +40,24 @@ export class AddressesTableViewComponent implements OnInit {
   @Output() copyToClipboard = new EventEmitter();
   @Output() sort = new EventEmitter();
 
-  public displayedColumns: string[] = ['name', 'address', 'description', 'enabled', 'actions'];
-  constructor() { }
+  public displayedColumns: string[] = [
+    'name',
+    'address',
+    'description',
+    'enabled',
+    'actions',
+  ];
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  public sorting(sort: { active: string, direction: string }) {
+  public sorting(sort: { active: string; direction: string }) {
     let sortingMode = null;
-    if (sort.direction === "")
-      sortingMode = null;
+    if (sort.direction === '') sortingMode = null;
     else {
-      if (sort.direction === "desc")
-        sortingMode = sort.active + "-" + sort.direction;
-      else
-        sortingMode = sort.active;
+      if (sort.direction === 'desc')
+        sortingMode = sort.active + '-' + sort.direction;
+      else sortingMode = sort.active;
     }
 
     this.sort.emit(sortingMode);

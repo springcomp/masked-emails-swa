@@ -3,17 +3,14 @@ import { Injectable, OnInit, Inject } from '@angular/core';
 import { UserInfo } from '@/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService implements OnInit {
-
   public clientPrincipal: UserInfo | undefined;
 
-  constructor(
-    @Inject(DOCUMENT) private document: Document
-  ) { }
+  constructor(@Inject(DOCUMENT) private document: Document) {}
 
-  async ngOnInit(){
+  async ngOnInit() {
     this.clientPrincipal = await this.getClientPrincipal();
   }
 
@@ -24,18 +21,21 @@ export class AuthService implements OnInit {
     return this.getIsInRole('registered');
   }
   public getIsInRole(roleName: string): boolean {
-    return (this.clientPrincipal != undefined && this.clientPrincipal.userRoles.indexOf(roleName) != -1); 
+    return (
+      this.clientPrincipal != undefined &&
+      this.clientPrincipal.userRoles.indexOf(roleName) != -1
+    );
   }
 
   public navigate(url: string): void {
     this.document.location.href = url;
   }
 
-  public login(): void{
+  public login(): void {
     const url = '/.auth/login/aad?post_login_redirect_uri=/masked-emails';
     this.navigate(url);
   }
-  
+
   public logout(): void {
     const url = '/.auth/logout?post_logout_redirect_uri=/home';
     this.navigate(url);

@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoaderService {
-
   public _loading: boolean = false;
   public loadingStatus: Subject<boolean> = new Subject();
 
-  constructor() { }
+  constructor() {}
 
   get loading(): boolean {
     return this._loading;
@@ -21,10 +20,10 @@ export class LoaderService {
   }
 
   public startLoading(): void {
-    this.loading  = true;
+    this.loading = true;
   }
 
   public stopLoading(): void {
-    this.loading  = false;
+    this.loading = false;
   }
 }

@@ -2,21 +2,27 @@
   <div class="message-header">
     <div class="section">
       <div class="item-position">
-        <button mat-icon-button color="primary" aria-label="Close" (click)="close()" class="large">
+        <button
+          mat-icon-button
+          color="primary"
+          aria-label="Close"
+          (click)="close()"
+          class="large"
+        >
           <fa-icon [icon]="['fas', 'chevron-left']"></fa-icon>
         </button>
         <span class="button-title-margin">inbox</span>
       </div>
-      <span class="date">{{messageSpec.receivedUtc| date:'medium'}}</span>
+      <span class="date">{{ messageSpec.receivedUtc | date : 'medium' }}</span>
     </div>
 
     <div class="sender-information">
-      <span class="display-name">{{messageSpec.sender.displayName}}</span>
-      <span class="address">{{messageSpec.sender.address}}</span>
+      <span class="display-name">{{ messageSpec.sender.displayName }}</span>
+      <span class="address">{{ messageSpec.sender.address }}</span>
     </div>
   </div>
   <div class="content-section" *ngIf="!loadingMessage">
-    <h3>{{messageSpec.subject}}</h3>
+    <h3>{{ messageSpec.subject }}</h3>
     <div class="text-color" [innerHTML]="getMessageBody()"></div>
   </div>
 

@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'app-unauthorized',
   templateUrl: './unauthorized.component.html',
   styleUrls: ['./unauthorized.component.scss'],
-  imports: []
+  imports: [],
 })
 export class UnauthorizedComponent {
   constructor() {}

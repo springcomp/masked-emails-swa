@@ -1,7 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
@@ -24,35 +28,33 @@ import { ProfileService } from '@/services';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-  ]
+  ],
 })
 export class ProfileDialogComponent {
-
   public newForwardingAddress: string = '';
 
-  constructor(public dialogRef: MatDialogRef<ProfileDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<ProfileDialogComponent>,
     private profileService: ProfileService,
-    @Inject(MAT_DIALOG_DATA) private data: { profile: Profile } ) {
-
-  }
+    @Inject(MAT_DIALOG_DATA) private data: { profile: Profile }
+  ) {}
 
   public close() {
     this.dialogRef.close();
   }
 
   public save() {
-      this.onUpdateForwardingAddress();
+    this.onUpdateForwardingAddress();
   }
 
   private onUpdateForwardingAddress(): void {
     var profile: Profile = {
       displayName: this.data.profile.displayName,
-      forwardingAddress: this.newForwardingAddress
+      forwardingAddress: this.newForwardingAddress,
     };
 
-    this.profileService.updateProfile(profile).subscribe(updated => {
+    this.profileService.updateProfile(profile).subscribe((updated) => {
       this.dialogRef.close({ event: 'UpdateProfile', data: updated });
     });
   }
-
 }

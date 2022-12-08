@@ -1,43 +1,58 @@
-
-  <!--<mat-spinner *ngIf="!dataLoaded" class="loader-position"></mat-spinner>-->
-
+<!--<mat-spinner *ngIf="!dataLoaded" class="loader-position"></mat-spinner>-->
 
 <!--<div *ngIf="dataLoaded">-->
 
-  <div class="header-container">
-    <div class="search-container">
-      <mat-form-field>
-        <input matInput [ngModel]='searchValue' (ngModelChange)='changedSearchField($event)' placeholder="Search">
-        <button mat-button *ngIf="searchValue" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchField()">
-          <fa-icon [icon]="['fas', 'times']"></fa-icon>
-        </button>
-      </mat-form-field>
-    </div>
-    <button mat-fab color="primary" (click)="openCreateDialog()"><fa-icon [icon]="['fas', 'plus']"></fa-icon></button>
+<div class="header-container">
+  <div class="search-container">
+    <mat-form-field>
+      <input
+        matInput
+        [ngModel]="searchValue"
+        (ngModelChange)="changedSearchField($event)"
+        placeholder="Search"
+      />
+      <button
+        mat-button
+        *ngIf="searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="clearSearchField()"
+      >
+        <fa-icon [icon]="['fas', 'times']"></fa-icon>
+      </button>
+    </mat-form-field>
   </div>
+  <button mat-fab color="primary" (click)="openCreateDialog()">
+    <fa-icon [icon]="['fas', 'plus']"></fa-icon>
+  </button>
+</div>
 
-  <div class="table-view table-container">
-    <app-addresses-table-view [dataSource]="dataSource"
-                              (updateAddress)="openUpdateDialog($event)"
-                              (deleteAddress)="openRemoveDialog($event)"
-                              (checkAddress)="onToggleChecked($event)"
-                              (copyToClipboard)="copyToClipboard($event)"
-                              (sort)="sorting($event)"></app-addresses-table-view>
+<div class="table-view table-container">
+  <app-addresses-table-view
+    [dataSource]="dataSource"
+    (updateAddress)="openUpdateDialog($event)"
+    (deleteAddress)="openRemoveDialog($event)"
+    (checkAddress)="onToggleChecked($event)"
+    (copyToClipboard)="copyToClipboard($event)"
+    (sort)="sorting($event)"
+  ></app-addresses-table-view>
+</div>
+
+<!--Responsive Table view-->
+<div class="mobile-view">
+  <app-addresses-table-mobile-view
+    [dataSource]="dataSource"
+    (updateAddress)="openUpdateDialog($event)"
+    (deleteAddress)="openRemoveDialog($event)"
+    (checkAddress)="onToggleChecked($event)"
+    (copyToClipboard)="copyToClipboard($event)"
+  ></app-addresses-table-mobile-view>
+</div>
+
+<div *ngIf="showLoadingSpinner" class="loader-container">
+  <div class="loader-margin">
+    <mat-spinner class="loader-position" [diameter]="30"></mat-spinner>
   </div>
-
-  <!--Responsive Table view-->
-  <div class="mobile-view">
-    <app-addresses-table-mobile-view [dataSource]="dataSource"
-                                     (updateAddress)="openUpdateDialog($event)"
-                                     (deleteAddress)="openRemoveDialog($event)"
-                                     (checkAddress)="onToggleChecked($event)"
-                                     (copyToClipboard)="copyToClipboard($event)"></app-addresses-table-mobile-view>
-
-  </div>
-
-  <div *ngIf="showLoadingSpinner" class="loader-container">
-    <div class="loader-margin">
-      <mat-spinner class="loader-position" [diameter]="30"></mat-spinner>
-    </div>
-  </div>
+</div>
 <!--</div>-->

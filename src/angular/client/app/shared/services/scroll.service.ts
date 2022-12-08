@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScrollService {
-
   private _scrollToBottom: boolean;
   constructor() {
     this.scrollToBottom = false;
@@ -20,8 +19,9 @@ export class ScrollService {
 
   public isScrolledToBottom($event): void {
     if ($event && $event.target) {
-
-      const scrolledOffset = Math.ceil($event.target.offsetHeight + $event.target.scrollTop);
+      const scrolledOffset = Math.ceil(
+        $event.target.offsetHeight + $event.target.scrollTop
+      );
 
       console.log(`offsetHeight: ${$event.target.offsetHeight}`);
       console.log(`scrollTop: ${$event.target.scrollTop}`);

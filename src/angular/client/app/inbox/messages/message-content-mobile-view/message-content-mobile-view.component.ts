@@ -17,7 +17,7 @@ import { MessageSpec, Message } from '@/models';
     FontAwesomeModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-  ]
+  ],
 })
 export class MessageContentMobileViewComponent implements OnInit {
   @Input() messageSpec: MessageSpec;
@@ -26,10 +26,9 @@ export class MessageContentMobileViewComponent implements OnInit {
 
   @Output() closeSidenav = new EventEmitter();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public getMessageBody(): string {
     if (this.messageContent != null) {
@@ -41,11 +40,10 @@ export class MessageContentMobileViewComponent implements OnInit {
       }
       return text;
     }
-    return "";
+    return '';
   }
 
   public close() {
     this.closeSidenav.emit();
   }
-
 }

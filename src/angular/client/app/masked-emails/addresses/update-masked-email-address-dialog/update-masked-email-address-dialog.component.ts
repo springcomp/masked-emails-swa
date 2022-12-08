@@ -2,7 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -24,7 +28,7 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
     MatButtonModule,
     MatDialogModule,
     MatInputModule,
-  ]
+  ],
 })
 export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase {
   public newAddressName: string;
@@ -33,30 +37,29 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
 
   private updatingAddress: MaskedEmail;
 
-  constructor(public dialogRef: MatDialogRef<UpdateMaskedEmailAddressDialogComponent>,
+  constructor(
+    public dialogRef: MatDialogRef<UpdateMaskedEmailAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { updatingAddress: MaskedEmail },
     formBuilder: FormBuilder,
     private addressService: AddressService,
-    private hashService: HashService) {
-
+    private hashService: HashService
+  ) {
     super(
       formBuilder,
       data.updatingAddress.name,
       data.updatingAddress.description
-      );
+    );
 
     this.updatingAddress = this.data.updatingAddress;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   public close(): void {
     this.dialogRef.close();
   }
 
   public update(): void {
-
     this.newAddressName = this.addressForm.value.name;
     this.newAddressDescription = this.addressForm.value.description;
     if (this.addressForm.value.password?.length > 0) {
@@ -91,7 +94,10 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
 
     console.log(updateRequest);
 
-    this.addressService.updateAddress(address.emailAddress, updateRequest)
-      .subscribe(_ => { this.close() });
+    this.addressService
+      .updateAddress(address.emailAddress, updateRequest)
+      .subscribe((_) => {
+        this.close();
+      });
   }
 }

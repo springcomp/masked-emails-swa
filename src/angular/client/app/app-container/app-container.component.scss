@@ -20,7 +20,7 @@
 .title {
   text-transform: uppercase;
   color: mat.get-color-from-palette($accent);
-  font-family: "Roboto";
+  font-family: 'Roboto';
   font-weight: 800;
   font-size: 20px;
 }
@@ -45,15 +45,14 @@
   background-color: mat.get-color-from-palette($background-color);
   display: flex;
   flex-direction: column;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .user-section {
   color: mat.get-color-from-palette($accent);
 }
 
-@media(max-width:768px) {
-
+@media (max-width: 768px) {
   .container {
     position: absolute;
     top: 0;

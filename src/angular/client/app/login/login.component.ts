@@ -7,11 +7,13 @@ import { LoaderService } from '@/services';
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ ]
+  imports: [],
 })
 export class LoginComponent implements OnInit {
-
-  constructor(public authService: AuthService, private loaderSvc : LoaderService) { }
+  constructor(
+    public authService: AuthService,
+    private loaderSvc: LoaderService
+  ) {}
 
   async ngOnInit() {
     this.loaderSvc.startLoading();

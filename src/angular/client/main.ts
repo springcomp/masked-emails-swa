@@ -1,6 +1,15 @@
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
-import { enableProdMode, ImportedNgModuleProviders, importProvidersFrom, Provider } from '@angular/core';
+import {
+  enableProdMode,
+  ImportedNgModuleProviders,
+  importProvidersFrom,
+  Provider,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Route, RouterModule } from '@angular/router';
@@ -11,9 +20,18 @@ import { AppComponent } from './app/app.component';
 
 import { AuthorizationGuard } from '@/core';
 
-import { HttpRequestInterceptor, MockedHttpRequestInterceptor } from '@/interceptors';
-import { MockedHttpMessageInterceptor, MockedHttpMessagesInterceptor } from '@/interceptors';
-import { MockedHttpProfileInterceptor, MockedHttpAddressInterceptor } from '@/interceptors';
+import {
+  HttpRequestInterceptor,
+  MockedHttpRequestInterceptor,
+} from '@/interceptors';
+import {
+  MockedHttpMessageInterceptor,
+  MockedHttpMessagesInterceptor,
+} from '@/interceptors';
+import {
+  MockedHttpProfileInterceptor,
+  MockedHttpAddressInterceptor,
+} from '@/interceptors';
 
 import { HomeComponent } from '@/routes/home';
 import { InboxComponent } from '@/routes/inbox';
@@ -34,11 +52,19 @@ const ROUTES: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: '/masked-emails' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'masked-emails', component: MaskedEmailsComponent, canActivate: [AuthorizationGuard]},
-  { path: 'inbox', component: InboxComponent, canActivate: [AuthorizationGuard]},
+  {
+    path: 'masked-emails',
+    component: MaskedEmailsComponent,
+    canActivate: [AuthorizationGuard],
+  },
+  {
+    path: 'inbox',
+    component: InboxComponent,
+    canActivate: [AuthorizationGuard],
+  },
   { path: 'unauthorized', component: UnauthorizedComponent },
 
-  { path: '**', redirectTo: 'masked-emails' }
+  { path: '**', redirectTo: 'masked-emails' },
 ];
 
 const providers: Array<Provider | ImportedNgModuleProviders> = [
@@ -46,11 +72,11 @@ const providers: Array<Provider | ImportedNgModuleProviders> = [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: isMocked ? MockedHttpRequestInterceptor : HttpRequestInterceptor,
-    multi: true
+    multi: true,
   },
   importProvidersFrom([
     RouterModule.forRoot(ROUTES, {}),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ]),
   provideHttpClient(withInterceptorsFromDi()),
   AuthorizationGuard,
@@ -69,5 +95,5 @@ if (environment.production) {
 }
 
 bootstrapApplication(AppComponent, { providers })
-  .then(() => { })
-  .catch(err => console.log(err));
+  .then(() => {})
+  .catch((err) => console.log(err));

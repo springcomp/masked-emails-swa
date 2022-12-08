@@ -6,15 +6,10 @@ import { MessagesComponent } from './messages/messages.component';
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
   styleUrls: ['./inbox.component.scss'],
-  imports: [
-    MessagesComponent,
-  ]
+  imports: [MessagesComponent],
 })
-
 export class InboxComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

@@ -13,7 +13,7 @@
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
 $primary: mat.define-palette(mat.$teal-palette, 300, 300, 500);
-$accent: mat.define-palette(mat.$blue-gray-palette, 900, 700, 900 );
+$accent: mat.define-palette(mat.$blue-gray-palette, 900, 700, 900);
 $background-color: mat.define-palette(mat.$gray-palette, 100, 100, 200);
 
 $highlight: mat.define-palette(mat.$teal-palette, 50, 50, 50);
@@ -37,7 +37,6 @@ $ClientApp-theme: mat.define-light-theme(
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($ClientApp-theme);
-
 
 ::ng-deep .mat-mdc-icon-button {
   color: mat.get-color-from-palette($primary, darker) !important;

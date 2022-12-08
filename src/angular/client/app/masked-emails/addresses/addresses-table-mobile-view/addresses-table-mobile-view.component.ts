@@ -11,7 +11,10 @@ import {
 
 import { MatTableDataSource } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {
+  MatSlideToggleChange,
+  MatSlideToggleModule,
+} from '@angular/material/slide-toggle';
 import { MatTableModule } from '@angular/material/table';
 
 import { MaskedEmail } from '@/models';
@@ -43,7 +46,7 @@ import { MaskedEmail } from '@/models';
   ],
 })
 export class AddressesTableMobileViewComponent {
-  @Input() dataSource: MatTableDataSource<MaskedEmail>;
+  @Input() dataSource!: MatTableDataSource<MaskedEmail>;
 
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
   @Output() deleteAddress = new EventEmitter<MaskedEmail>();
@@ -51,7 +54,7 @@ export class AddressesTableMobileViewComponent {
   @Output() copyToClipboard = new EventEmitter();
   @Output() sort = new EventEmitter();
 
-  public expandedElement: MaskedEmail;
+  public expandedElement?: MaskedEmail;
 
   public mobileColumnsToDisplay: string[] = ['informations', 'actions'];
 
@@ -75,7 +78,7 @@ export class AddressesTableMobileViewComponent {
     this.deleteAddress.emit(address);
   }
 
-  public onToggleChecked(address: MaskedEmail, $event) {
+  public onToggleChecked(address: MaskedEmail, $event: MatSlideToggleChange) {
     this.checkAddress.emit({ address, $event });
   }
 

@@ -33,7 +33,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
 })
 export class AddressesTableViewComponent {
-  @Input() dataSource: MatTableDataSource<MaskedEmail>;
+  @Input() dataSource!: MatTableDataSource<MaskedEmail>;
 
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
   @Output() deleteAddress = new EventEmitter<MaskedEmail>();

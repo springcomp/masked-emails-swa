@@ -22,21 +22,18 @@ import { MessageSpec, Message } from '@/models';
   ],
 })
 export class MessageContentViewComponent {
-  @Input() messageSpec: MessageSpec;
-  @Input() messageContent: Message;
-  @Input() loadingMessage: boolean;
+  @Input() messageSpec!: MessageSpec;
+  @Input() messageContent?: Message;
+  @Input() loadingMessage = false;
 
   @Output() closeSidenav = new EventEmitter();
 
   public getMessageBody(): string {
-    if (this.messageContent != null) {
+    if (this.messageContent) {
       const html = this.messageContent.htmlBody;
       const text = this.messageContent.textBody;
 
-      if (html) {
-        return html;
-      }
-      return text;
+      return html ?? text ?? '';
     }
     return '';
   }

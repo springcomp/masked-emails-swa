@@ -46,21 +46,20 @@ import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view
 })
 export class AddressesComponent implements OnInit, OnDestroy {
   public pageResult?: AddressPages;
-  public searchValue: string;
-  public diagnostics: string;
+  public searchValue = '';
+  public diagnostics?: string;
 
   public addresses: MaskedEmail[] = [];
-  public dataSource: MatTableDataSource<MaskedEmail>;
-  public expandedElement: MaskedEmail | null;
+  public dataSource!: MatTableDataSource<MaskedEmail>;
+  public expandedElement?: MaskedEmail;
   public searchChanged: Subject<string> = new Subject<string>();
 
-  private lock: boolean;
-  private sortingMode: string;
-  private isSearching: boolean;
-  private numberOfRow: number;
-  private lockAddresses: boolean;
+  private lock = false;
+  private sortingMode = 'asc';
+  private isSearching = false;
+  private numberOfRow = 0;
+  private lockAddresses = false;
 
-  mobileQuery: MediaQueryList;
   constructor(
     private addressService: AddressService,
     private snackBar: MatSnackBar,

@@ -27,9 +27,10 @@ import { ScrollEvent } from '@/models';
 })
 export class AppComponent {
   @ViewChild('scrollMe', { static: true })
-  private myScrollContainer: ElementRef;
+  private myScrollContainer!: ElementRef;
 
-  public lock: boolean;
+  public lock = false;
+
   constructor(
     public authService: AuthService,
     public loaderService: LoaderService,

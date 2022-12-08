@@ -31,7 +31,7 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
   ],
 })
 export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase {
-  public newAddressName: string;
+  public newAddressName!: string;
   public newAddressDescription?: string;
   public newPassword?: string;
 
@@ -59,7 +59,8 @@ export class UpdateMaskedEmailAddressDialogComponent extends CreateOrUpdateMaske
 
   public update(): void {
     this.newAddressName = this.addressForm.value.name!;
-    this.newAddressDescription = this.addressForm.value.description;
+    this.newAddressDescription =
+      this.addressForm.value.description ?? undefined;
     if (this.addressForm.value.password?.length ?? 0 > 0) {
       this.newPassword = this.addressForm.value.password!;
     }

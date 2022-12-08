@@ -1,25 +1,25 @@
 export class Profile {
-  displayName: string;
-  forwardingAddress: string;
+  displayName!: string;
+  forwardingAddress!: string;
 }
 
 export class AddressPages {
-  count: number;
-  total: number;
+  count!: number;
+  total!: number;
   cursor?: string;
-  addresses: MaskedEmail[];
+  addresses!: MaskedEmail[];
 }
 
 export class Address {
-  name: string;
+  name!: string;
   description?: string;
-  emailAddress: string;
+  emailAddress!: string;
   forwardToEmailAddress?: string;
   password?: string;
 }
 
 export class MaskedEmail extends Address {
-  forwardingEnabled: boolean;
+  forwardingEnabled!: boolean;
 
   static fromAddress(address: Address): MaskedEmail {
     const masked: MaskedEmail = {
@@ -37,30 +37,30 @@ export class MaskedEmail extends Address {
 }
 
 export class MaskedEmailRequest {
-  name: string;
+  name!: string;
   description?: string;
   passwordHash?: string;
-  forwardingEnabled: boolean;
+  forwardingEnabled!: boolean;
 }
 
 export class UpdateMaskedEmailRequest {
-  name: string;
+  name!: string;
   description?: string;
   passwordHash?: string;
 }
 
 export class EmailAddress {
-  address: string;
+  address!: string;
   displayName?: string;
 }
 export class MessageSpec {
-  location: string;
+  location!: string;
   receivedUtc: Date = new Date();
   subject?: string;
   sender: EmailAddress = new EmailAddress();
 }
 
 export class Message extends MessageSpec {
-  htmlBody: string;
-  textBody: string;
+  htmlBody?: string;
+  textBody?: string;
 }

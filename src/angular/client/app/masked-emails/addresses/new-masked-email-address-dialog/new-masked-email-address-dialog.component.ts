@@ -34,9 +34,9 @@ import { CreateOrUpdateMaskedEmailAddressDialogComponentBase } from '../create-o
 export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEmailAddressDialogComponentBase {
   public hidePassword = true;
   public timeLeft = 45;
-  public interval: NodeJS.Timeout;
+  public interval?: NodeJS.Timeout;
   public showGeneratedPassword = false;
-  public addressCreated: Address;
+  public addressCreated?: Address;
 
   constructor(
     public dialogRef: MatDialogRef<NewMaskedEmailAddressDialogComponent>,
@@ -60,7 +60,7 @@ export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEm
   public createAddress(): void {
     const request: MaskedEmailRequest = {
       name: this.addressForm.value.name!,
-      description: this.addressForm.value.description,
+      description: this.addressForm.value.description ?? undefined,
       forwardingEnabled: true,
     };
     if (this.addressForm.value.password?.length ?? 0 > 0) {
@@ -95,7 +95,7 @@ export class NewMaskedEmailAddressDialogComponent extends CreateOrUpdateMaskedEm
   public closeDialogRefAfterCreate() {
     this.dialogRef.close({
       event: 'Create',
-      data: MaskedEmail.fromAddress(this.addressCreated),
+      data: MaskedEmail.fromAddress(this.addressCreated!),
     });
   }
 

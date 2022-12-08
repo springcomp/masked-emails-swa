@@ -18,7 +18,7 @@ import { MessageSpec } from '@/models';
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
 export class MessagesTableMobileViewComponent {
-  @Input() dataSource: MatTableDataSource<MessageSpec>;
+  @Input() dataSource!: MatTableDataSource<MessageSpec>;
 
   @Output() openMessage = new EventEmitter<MessageSpec>();
 

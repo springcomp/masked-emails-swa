@@ -25,8 +25,8 @@ import { ProfileDialogComponent } from '../profile-dialog/profile-dialog.compone
   ],
 })
 export class EditForwardingAddressComponent {
-  @Input() userIsAuthenticated: boolean;
-  @Input() user: Profile;
+  @Input() userIsAuthenticated = false;
+  @Input() user!: Profile;
 
   @Output() updateUserModel = new EventEmitter<Profile>();
 

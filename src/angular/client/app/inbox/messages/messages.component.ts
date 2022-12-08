@@ -28,12 +28,12 @@ import { MessageContentViewComponent } from './message-content-view/message-cont
 })
 export class MessagesComponent implements OnInit, OnDestroy {
   public selection = new SelectionModel<MessageSpec>(true, []);
-  opened: boolean;
-  message: Message | null;
+  opened = false;
+  message?: Message;
   messageContent: MessageSpec = new MessageSpec();
   messages: MessageSpec[] = [];
-  dataSource: MatTableDataSource<MessageSpec>;
-  loadingMessage: boolean;
+  dataSource?: MatTableDataSource<MessageSpec>;
+  loadingMessage = false;
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -62,7 +62,9 @@ export class MessagesComponent implements OnInit, OnDestroy {
 
   public getMessageBody(): string {
     if (this.message != null) {
-      return this.message.htmlBody;
+      const html = this.message.htmlBody;
+      const text = this.message.textBody;
+      return html ?? text ?? '';
     }
     return '';
   }

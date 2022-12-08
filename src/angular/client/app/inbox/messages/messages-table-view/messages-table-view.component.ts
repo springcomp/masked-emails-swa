@@ -20,8 +20,8 @@ import { MessageSpec } from '@/models';
   imports: [CommonModule, FontAwesomeModule, MatButtonModule, MatTableModule],
 })
 export class MessagesTableViewComponent {
-  @Input() dataSource: MatTableDataSource<MessageSpec>;
-  @Input() selection: SelectionModel<MessageSpec>;
+  @Input() dataSource!: MatTableDataSource<MessageSpec>;
+  @Input() selection!: SelectionModel<MessageSpec>;
 
   @Output() openMessage = new EventEmitter<MessageSpec>();
 

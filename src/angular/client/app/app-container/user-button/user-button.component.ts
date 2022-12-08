@@ -12,8 +12,8 @@ import { Profile } from '@/models';
   imports: [FontAwesomeModule, GravatarModule],
 })
 export class UserButtonComponent {
-  @Input() icon: string;
-  @Input() user: Profile;
+  @Input() icon!: string;
+  @Input() user!: Profile;
 
   get forwardingAddress(): string {
     return this.user && this.user.forwardingAddress

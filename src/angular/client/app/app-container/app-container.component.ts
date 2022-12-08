@@ -42,11 +42,12 @@ import { EditForwardingAddressComponent } from './edit-forwarding-address/edit-f
   ],
 })
 export class AppContainerComponent implements OnInit {
-  @ViewChild('sidenav', { static: false }) public sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: false })
+  public sidenav!: MatSidenav;
 
   public isAuthenticated = false;
 
-  public my: Profile | undefined = undefined;
+  public my?: Profile;
 
   constructor(
     private profileService: ProfileService,

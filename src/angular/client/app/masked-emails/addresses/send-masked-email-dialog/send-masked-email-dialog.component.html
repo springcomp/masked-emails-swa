@@ -1,0 +1,58 @@
+<h1 mat-dialog-title>Send an email</h1>
+
+<div mat-dialog-content class="form-width">
+  <form [formGroup]="emailForm">
+    <mat-form-field class="full-width">
+      <mat-label>From</mat-label>
+      <input matInput readonly formControlName="from" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>To</mat-label>
+      <input
+        matInput
+        formControlName="to"
+        placeholder="to@example.com"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Subject</mat-label>
+      <input
+        matInput
+        formControlName="subject"
+        placeholder="RE: subject"
+        required
+      />
+    </mat-form-field>
+
+    <mat-tab-group>
+      <mat-tab label="Editor">
+        <mat-form-field class="full-width">
+          <markdown-editor
+            formControlName="markdown"
+            placeholder="Write email text as Markdown"
+            required
+          >
+          </markdown-editor>
+        </mat-form-field>
+      </mat-tab>
+      <mat-tab label="Preview">
+        <div [innerHTML]="renderMarkdown()"></div>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <button
+    mat-stroked-button
+    color="primary"
+    [disabled]="emailForm.invalid"
+    (click)="sendEmail()"
+  >
+    Submit
+  </button>
+  <button mat-stroked-button (click)="close()">Cancel</button>
+</div>

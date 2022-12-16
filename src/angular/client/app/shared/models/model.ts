@@ -49,6 +49,13 @@ export class UpdateMaskedEmailRequest {
   passwordHash?: string;
 }
 
+export class SendEmailRequest {
+  from!: string;
+  to!: string;
+  subject!: string;
+  htmlBody!: string;
+}
+
 export class EmailAddress {
   address!: string;
   displayName?: string;

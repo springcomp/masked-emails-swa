@@ -31,6 +31,7 @@
 <div class="table-view table-container">
   <app-addresses-table-view
     [dataSource]="dataSource"
+    (sendEmail)="openSendEmailDialog($event)"
     (updateAddress)="openUpdateDialog($event)"
     (deleteAddress)="openRemoveDialog($event)"
     (checkAddress)="onToggleChecked($event)"

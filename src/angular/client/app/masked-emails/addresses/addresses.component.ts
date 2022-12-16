@@ -27,6 +27,7 @@ import { UpdateMaskedEmailAddressDialogComponent } from './update-masked-email-a
 
 import { AddressesTableViewComponent } from './addresses-table-view/addresses-table-view.component';
 import { AddressesTableMobileViewComponent } from './addresses-table-mobile-view/addresses-table-mobile-view.component';
+import { SendMaskedEmailDialogComponent } from './send-masked-email-dialog/send-masked-email-dialog.component';
 
 @Component({
   standalone: true,
@@ -193,6 +194,12 @@ export class AddressesComponent implements OnInit, OnDestroy {
   openUpdateDialog(address: MaskedEmail): void {
     this.dialog.open(UpdateMaskedEmailAddressDialogComponent, {
       data: { updatingAddress: address },
+    });
+  }
+
+  openSendEmailDialog(from: string): void {
+    this.dialog.open(SendMaskedEmailDialogComponent, {
+      data: { from: from },
     });
   }
 

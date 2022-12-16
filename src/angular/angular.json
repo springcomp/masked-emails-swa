@@ -104,9 +104,16 @@
               "client/assets"
             ],
             "styles": [
-              "client/styles.scss"
+              "client/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/bootstrap-markdown/css/bootstrap-markdown.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/marked/marked.min.js",
+              "node_modules/emoji-toolkit/lib/js/joypixels.min.js"
+            ]
           }
         },
         "lint": {

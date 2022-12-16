@@ -35,6 +35,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export class AddressesTableViewComponent {
   @Input() dataSource!: MatTableDataSource<MaskedEmail>;
 
+  @Output() sendEmail = new EventEmitter<string>();
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
   @Output() deleteAddress = new EventEmitter<MaskedEmail>();
   @Output() checkAddress = new EventEmitter();
@@ -63,6 +64,10 @@ export class AddressesTableViewComponent {
 
   public openUpdateDialog(address: MaskedEmail) {
     this.updateAddress.emit(address);
+  }
+
+  public openSendEmailDialog(address: MaskedEmail) {
+    this.sendEmail.emit(address.emailAddress);
   }
 
   public openRemoveDialog(address: MaskedEmail) {

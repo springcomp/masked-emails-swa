@@ -9,6 +9,7 @@ import {
   ImportedNgModuleProviders,
   importProvidersFrom,
   Provider,
+  SecurityContext,
 } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,6 +41,11 @@ import { MaskedEmailsComponent } from '@/routes/masked-emails';
 import { UnauthorizedComponent } from '@/routes/unauthorized';
 
 import { environment } from '@/environment';
+import {
+  MarkdownModule,
+  MarkdownModuleConfig,
+  MarkedOptions,
+} from 'ngx-markdown';
 
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
@@ -47,6 +53,20 @@ export function getBaseUrl() {
 
 export const isMocked = environment.mocked;
 console.log(`Running Masked Emails Angular app (isMocked: ${isMocked}).`);
+
+const markdownConfig: MarkdownModuleConfig = {
+  markedOptions: {
+    provide: MarkedOptions,
+    useValue: {
+      gfm: true,
+      breaks: false,
+      pedantic: false,
+      smartLists: true,
+      smartypants: false,
+    },
+  },
+  sanitize: SecurityContext.NONE,
+};
 
 const ROUTES: Route[] = [
   { path: '', pathMatch: 'full', redirectTo: '/masked-emails' },
@@ -63,7 +83,6 @@ const ROUTES: Route[] = [
     canActivate: [AuthorizationGuard],
   },
   { path: 'unauthorized', component: UnauthorizedComponent },
-
   { path: '**', redirectTo: 'masked-emails' },
 ];
 
@@ -75,8 +94,9 @@ const providers: Array<Provider | ImportedNgModuleProviders> = [
     multi: true,
   },
   importProvidersFrom([
-    RouterModule.forRoot(ROUTES, {}),
     BrowserAnimationsModule,
+    MarkdownModule.forRoot(markdownConfig),
+    RouterModule.forRoot(ROUTES, {}),
   ]),
   provideHttpClient(withInterceptorsFromDi()),
   AuthorizationGuard,

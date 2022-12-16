@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 import { HttpService } from './http.service';
 import {
   Address,
   AddressPages,
   MaskedEmailRequest,
+  SendEmailRequest,
   UpdateMaskedEmailRequest,
 } from '../models/model';
 
@@ -89,6 +90,24 @@ export class AddressService {
     );
 
     return this.http.get<AddressPages>(requestUri, headers);
+  }
+
+  public sendEmail(request: SendEmailRequest): Observable<any> {
+
+    const email = request.from;
+    const req = {
+      from: request.from,
+      to: request.to,
+      subject: request.subject,
+      htmlBody: JSON.stringify(request.htmlBody),
+    }
+
+    const headers = { headers: this.helpers.getHeaders() };
+    const requestUri = this.helpers.getRequestUri(
+      `/api/profiles/my/addresses/${email}`
+    );
+
+    return this.http.post<SendEmailRequest>(requestUri, req, headers);
   }
 
   private urlBuilder(

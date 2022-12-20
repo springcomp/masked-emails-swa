@@ -56,7 +56,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
   public searchChanged: Subject<string> = new Subject<string>();
 
   private lock = false;
-  private sortingMode = 'asc';
+  private sortingMode = 'created-utc-desc';
   private isSearching = false;
   private numberOfRow = 0;
   private lockAddresses = false;

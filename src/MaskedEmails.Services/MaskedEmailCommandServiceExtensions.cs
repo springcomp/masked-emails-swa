@@ -62,5 +62,20 @@ namespace MaskedEmails.Services
             };
             await service.QueueCommandAsync(changePasswordCommand);
         }
+        public static async Task SendMaskedEmail(this IMaskedEmailCommandService service
+            , string sender
+            , string address
+            , string subject
+            , string message)
+        {
+            var sendCommand = new SendMaskedEmailCommand
+            {
+                Sender = sender,
+                Address = address,
+                Subject = subject,
+                Message = message,
+            };
+            await service.QueueCommandAsync(sendCommand);
+        }
     }
 }

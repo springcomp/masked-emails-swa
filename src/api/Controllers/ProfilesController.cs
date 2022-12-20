@@ -228,4 +228,26 @@ public sealed class ProfilesController : ApiControllerBase
 		return NoContent();
 	}
 
+	[FunctionName("post-profiles-send-email")]
+	public async Task<IActionResult> SendMaskedEmailAsync(
+		[HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "profiles/my/addresses/{email}")] SendMaskedEmailRequest request,
+		[UserInfo] ClaimsPrincipal identity,
+		string email
+	)
+	{
+		if (!GetAuthenticatedUserId(identity, out var identifier))
+			return BadRequest();
+
+		System.Diagnostics.Debug.Assert(email == request.From);
+
+		await service_.SendMaskedEmail(
+			identifier,
+			email,
+			request.To,
+			request.Subject,
+			request.HtmlBody
+			);
+
+		return NoContent();
+	}
 }

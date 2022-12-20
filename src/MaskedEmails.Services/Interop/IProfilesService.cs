@@ -19,5 +19,6 @@ namespace MaskedEmails.Services.Interop
         Task<MaskedEmailWithPassword> CreateMaskedEmail(string userId, string name, string email, string passwordHash, string description = null, bool enableForwarding = true);
         Task UpdateMaskedEmail(string userId, string email, string name, string description, string passwordHash = null);
         Task DeleteMaskedEmail(string userId, string email);
+        Task SendMaskedEmail(string userId, string email, string recipient, string subject, string body);
     }
 }

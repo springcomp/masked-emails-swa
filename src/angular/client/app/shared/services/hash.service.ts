@@ -36,7 +36,7 @@ export class HashService {
   // there methods are public for testing purposes only
 
   public randomSalt(length: number): Uint8Array {
-    const bytes = this.convertUtf8StringToByteArray(this.salt_chars);
+    const bytes = this.convertUtf16StringToUint8Array(this.salt_chars);
     const array = new Uint8Array(length);
     for (let index = 0; index < length; index++) {
       array[index] = bytes[this.randomService.getNext(bytes.length)];
@@ -44,13 +44,36 @@ export class HashService {
     return array;
   }
 
-  public convertUtf8StringToByteArray(str: string): Uint8Array {
-    const utf8 = unescape(encodeURIComponent(str));
-    const array = new Uint8Array(utf8.length);
-    for (let index = 0; index < array.length; index++) {
-      array[index] = utf8.charCodeAt(index);
+  public convertUtf16StringToUint8Array(str: string): Uint8Array {
+    var offset = 0;
+    var buffer = new Uint8Array(str.length * 4);
+    for (var i = 0; i < str.length; i++) {
+      var charCode = str.charCodeAt(i);
+      if (charCode < 0x80) buffer[offset++] = charCode;
+      else if (charCode < 0x800) {
+        buffer[offset++] = 0xc0 | (charCode >> 6);
+        buffer[offset++] = 0x80 | (charCode & 0x3f);
+      } else if (charCode < 0xd800 || charCode >= 0xe000) {
+        buffer[offset++] = 0xe0 | (charCode >> 12);
+        buffer[offset++] = 0x80 | ((charCode >> 6) & 0x3f);
+        buffer[offset++] = 0x80 | (charCode & 0x3f);
+      }
+      // surrogate pair
+      else {
+        i++;
+        // UTF-16 encodes 0x10000-0x10FFFF by
+        // subtracting 0x10000 and splitting the
+        // 20 bits of 0x0-0xFFFFF into two halves
+        charCode =
+          0x10000 + (((charCode & 0x3ff) << 10) | (str.charCodeAt(i) & 0x3ff));
+        buffer[offset++] = 0xf0 | (charCode >> 18);
+        buffer[offset++] = 0x80 | ((charCode >> 12) & 0x3f);
+        buffer[offset++] = 0x80 | ((charCode >> 6) & 0x3f);
+        buffer[offset++] = 0x80 | (charCode & 0x3f);
+      }
     }
-    return array;
+
+    return buffer.slice(0, offset);
   }
 
   public toBase64(array: Uint8Array): string {

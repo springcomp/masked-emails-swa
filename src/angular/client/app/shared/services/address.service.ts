@@ -1,21 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { HttpService } from './http.service';
+import { HttpService, HashService } from '@/services';
 import {
   Address,
   AddressPages,
   MaskedEmailRequest,
   SendEmailRequest,
   UpdateMaskedEmailRequest,
-} from '../models/model';
+} from '@/models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AddressService {
-  constructor(private helpers: HttpService, private http: HttpClient) {}
+  constructor(
+    private helpers: HttpService,
+    private http: HttpClient,
+    private hash: HashService
+  ) {}
 
   public getAddresses(): Observable<Address[]> {
     const headers = { headers: this.helpers.getHeaders() };
@@ -93,14 +97,12 @@ export class AddressService {
   }
 
   public sendEmail(request: SendEmailRequest): Observable<any> {
-
     const email = request.from;
+    const htmlBody = this.toBase64(request.htmlBody);
     const req = {
-      from: request.from,
-      to: request.to,
-      subject: request.subject,
-      htmlBody: JSON.stringify(request.htmlBody),
-    }
+      ...request,
+      htmlBody: htmlBody,
+    };
 
     const headers = { headers: this.helpers.getHeaders() };
     const requestUri = this.helpers.getRequestUri(
@@ -108,6 +110,10 @@ export class AddressService {
     );
 
     return this.http.post<SendEmailRequest>(requestUri, req, headers);
+  }
+
+  private toBase64(html: string): string {
+    return this.hash.toBase64(this.hash.convertUtf16StringToUint8Array(html));
   }
 
   private urlBuilder(

@@ -255,18 +255,20 @@ namespace MaskedEmails.Services
             }
         }
 
-        public async Task SendMaskedEmail(string userId, string email, string sender, string subject, string body)
+        public async Task SendMaskedEmail(string userId, string from, string to, string subject, string body)
         {
             var record = await context_.GetProfile(userId);
             if (record == null)
                 throw Error.NoSuchProfile(userId);
 
-            var address = record.Addresses.SingleOrDefault(a => a.EmailAddress == email);
+            var address = record.Addresses.SingleOrDefault(a => a.EmailAddress == from);
             if (address == null)
-                throw Error.NoSuchMaskedEmailAddress(email);
+                throw Error.NoSuchMaskedEmailAddress(from);
+
+            string sender = $"{record.DisplayName} <{record.EmailAddress}>";
 
             await commands_.SendMaskedEmail(
-                sender, email, subject, body
+                sender, to, subject, body
                 );
         }
 

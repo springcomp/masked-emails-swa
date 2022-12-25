@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
-import { AddressService } from '@/services';
+import { AddressService, ProfileService } from '@/services';
 import { ClipboardService } from '@/services';
 import { LoaderService } from '@/services';
 import { MaskedEmail, AddressPages } from '@/models';
@@ -62,6 +62,7 @@ export class AddressesComponent implements OnInit, OnDestroy {
   private lockAddresses = false;
 
   constructor(
+    private profileService: ProfileService,
     private addressService: AddressService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -198,8 +199,11 @@ export class AddressesComponent implements OnInit, OnDestroy {
   }
 
   openSendEmailDialog(from: string): void {
-    this.dialog.open(SendMaskedEmailDialogComponent, {
-      data: { from: from },
+    this.profileService.getProfile().subscribe((profile) => {
+      const email = { address: from, displayName: profile.displayName };
+      this.dialog.open(SendMaskedEmailDialogComponent, {
+        data: { from: email },
+      });
     });
   }
 

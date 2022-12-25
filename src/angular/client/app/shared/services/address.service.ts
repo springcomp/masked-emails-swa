@@ -96,8 +96,7 @@ export class AddressService {
     return this.http.get<AddressPages>(requestUri, headers);
   }
 
-  public sendEmail(request: SendEmailRequest): Observable<any> {
-    const email = request.from;
+  public sendEmail(address: string, request: SendEmailRequest): Observable<any> {
     const htmlBody = this.toBase64(request.htmlBody);
     const req = {
       ...request,
@@ -106,7 +105,7 @@ export class AddressService {
 
     const headers = { headers: this.helpers.getHeaders() };
     const requestUri = this.helpers.getRequestUri(
-      `/api/profiles/my/addresses/${email}`
+      `/api/profiles/my/addresses/${address}`
     );
 
     return this.http.post<SendEmailRequest>(requestUri, req, headers);

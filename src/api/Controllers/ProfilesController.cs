@@ -238,10 +238,8 @@ public sealed class ProfilesController : ApiControllerBase
 		if (!GetAuthenticatedUserId(identity, out var identifier))
 			return BadRequest();
 
-		System.Diagnostics.Debug.Assert(email == request.From);
-
 		await service_.SendMaskedEmail(
-			identifier,
+			identifier!,
 			email,
 			request.To,
 			request.Subject,

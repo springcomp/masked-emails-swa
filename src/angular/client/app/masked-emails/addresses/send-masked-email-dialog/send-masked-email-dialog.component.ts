@@ -27,6 +27,7 @@ import { MarkdownService } from 'ngx-markdown';
 
 import { MarkdownEditorComponent } from '@/core/markdown-editor/markdown-editor.component';
 import { AddressService } from '@/services';
+import { EmailAddress } from '@/models';
 
 @Component({
   standalone: true,
@@ -50,7 +51,7 @@ export class SendMaskedEmailDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<SendMaskedEmailDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { from: string },
+    @Inject(MAT_DIALOG_DATA) public data: { from: EmailAddress },
     formBuilder: FormBuilder,
     private addressService: AddressService,
     private snackBar: MatSnackBar,
@@ -58,10 +59,13 @@ export class SendMaskedEmailDialogComponent {
     private sanitizer: DomSanitizer
   ) {
     this.emailForm = formBuilder.group<SendMaskedEmailDialogData>({
-      from: new FormControl(data.from, {
-        validators: Validators.required,
-        nonNullable: true,
-      }),
+      from: new FormControl(
+        SendMaskedEmailDialogComponent.formatEmailAddress(data.from),
+        {
+          validators: Validators.required,
+          nonNullable: true,
+        }
+      ),
       subject: new FormControl('', {
         validators: Validators.required,
         nonNullable: true,
@@ -95,16 +99,21 @@ export class SendMaskedEmailDialogComponent {
     const html = this.renderMarkdown();
     const { changingThisBreaksApplicationSecurity } = html as any;
 
+    const address = this.data.from.address;
+    const sender = SendMaskedEmailDialogComponent.formatEmailAddress(
+      this.data.from
+    );
+
     const request = {
-      from: this.emailForm.value.from,
+      from: sender,
       to: this.emailForm.value.to,
       subject: this.emailForm.value.subject,
       htmlBody: changingThisBreaksApplicationSecurity,
     };
 
-    this.addressService.sendEmail(request).subscribe(() => {
+    this.addressService.sendEmail(address, request).subscribe(() => {
       this.snackBar.open(
-        'Email has been successfully submitted for delivery.',
+        'Email has been successfullfy submitted for delivery.',
         'Send an email',
         {
           duration: 2000,
@@ -112,5 +121,11 @@ export class SendMaskedEmailDialogComponent {
       );
       this.close();
     });
+  }
+
+  private static formatEmailAddress(address: EmailAddress) {
+    return address.displayName
+      ? `${address.displayName} <${address.address}>`
+      : address.address;
   }
 }

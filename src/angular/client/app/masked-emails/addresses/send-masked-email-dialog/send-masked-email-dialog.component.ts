@@ -70,7 +70,10 @@ export class SendMaskedEmailDialogComponent {
         validators: Validators.required,
         nonNullable: true,
       }),
-      markdown: new FormControl('# Overview\nThis is some **bold** text.'),
+      markdown: new FormControl('', {
+        validators: Validators.required,
+        nonNullable: true,
+      }),
     });
   }
 
@@ -86,7 +89,6 @@ export class SendMaskedEmailDialogComponent {
   }
 
   public sendEmail(): void {
-
     // horrible hack:
     // TODO: find a better way to extract HTML string
 

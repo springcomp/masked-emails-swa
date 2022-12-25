@@ -102,8 +102,8 @@ export class MarkdownEditorComponent
   get placeholder() {
     return this._placeholder;
   }
-  set placeholder(plh) {
-    this._placeholder = plh;
+  set placeholder(placeholder: string) {
+    this._placeholder = placeholder;
     this.onPropagateChanges();
   }
   private _placeholder: string = '';

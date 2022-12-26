@@ -265,7 +265,7 @@ namespace MaskedEmails.Services
             if (address == null)
                 throw Error.NoSuchMaskedEmailAddress(from);
 
-            string sender = $"{record.DisplayName} <{record.EmailAddress}>";
+            string sender = $"{record.DisplayName} <{address.EmailAddress}>";
 
             await commands_.SendMaskedEmail(
                 sender, to, subject, body

@@ -3,6 +3,7 @@ using MaskedEmails.Inbox.Interop;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Net.Http;
 
 namespace MaskedEmails.Inbox.Http
 {
@@ -20,10 +21,7 @@ namespace MaskedEmails.Inbox.Http
             services.Configure<InboxApiSettings>(inboxApiSettingsSection);
 
             var authHttpBuilder = services
-                .AddHttpClient("inbox-api-oauth", c =>
-                {
-                    c.BaseAddress = new Uri(inboxApiSettings.Authority);
-                })
+                .AddHttpClient("inbox-api-oauth", NewMethod(inboxApiSettings))
                 ;
 
             services
@@ -36,6 +34,14 @@ namespace MaskedEmails.Inbox.Http
                 ;
 
             return services;
+        }
+
+        private static Action<HttpClient> NewMethod(InboxApiSettings inboxApiSettings)
+        {
+            return c =>
+            {
+                c.BaseAddress = new Uri(inboxApiSettings.Authority);
+            };
         }
     }
 }

@@ -2,7 +2,7 @@
 
 public class ApiControllerBase
 {
-    protected bool GetAuthenticatedUserId(ClaimsPrincipal identity, out string? identifier)
+    protected static bool GetAuthenticatedUserId(ClaimsPrincipal identity, out string? identifier)
     {
         identifier = null;
 
@@ -19,39 +19,27 @@ public class ApiControllerBase
     }
 
     protected static IActionResult BadRequest()
-    {
-        return new StatusCodeResult(StatusCodes.Status400BadRequest);
-    }
+        => new StatusCodeResult(StatusCodes.Status400BadRequest);
     protected static IActionResult Conflict()
-    {
-        return new StatusCodeResult(StatusCodes.Status409Conflict);
-    }
+        => new StatusCodeResult(StatusCodes.Status409Conflict);
     protected static IActionResult NoContent()
-    {
-        return new StatusCodeResult(StatusCodes.Status204NoContent);
-    }
+        => new StatusCodeResult(StatusCodes.Status204NoContent);
     protected static IActionResult Ok()
-    {
-        return new OkResult();
-    }
+        => new OkResult();
     protected static IActionResult Ok<T>(T @object)
-    {
-        return new OkObjectResult(@object);
-    }
+        => new OkObjectResult(@object);
     protected static IActionResult StatusCode(int statusCode)
-    {
-        return new StatusCodeResult(statusCode);
-    }
+        => new StatusCodeResult(statusCode);
 
     protected static T GetQueryParameter<T>(HttpRequest req, string name, T defaultValue)
-    {
-        return  GetQueryParameter<T>(req, name) ?? defaultValue;
-    }
+        => GetQueryParameter<T>(req, name) ?? defaultValue;
     protected static T? GetQueryParameter<T>(HttpRequest req, string name)
     {
         var text = req.Query[name].FirstOrDefault();
-        if (text != null){
-            if (typeof(T) == typeof(int)){
+        if (text != null)
+        {
+            if (typeof(T) == typeof(int))
+            {
                 if (Int32.TryParse(text, out int _number))
                     return (T)(object)_number;
             }
@@ -61,11 +49,8 @@ public class ApiControllerBase
         return (T?)(object?)null;
     }
     protected static string? GetQueryParameter(HttpRequest req, string name)
-    {
-        return req.Query[name].FirstOrDefault();
-    }
+        => req.Query[name].FirstOrDefault();
+
     protected static string GetQueryParameter(HttpRequest req, string name, string defaultValue)
-    {
-        return req.Query[name].FirstOrDefault() ?? defaultValue;
-    }
+        => req.Query[name].FirstOrDefault() ?? defaultValue;
 }

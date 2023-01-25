@@ -1,5 +1,6 @@
 ﻿using MaskedEmails.Inbox.Model;
 using Refit;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace MaskedEmails.Inbox.Interop
@@ -12,6 +13,6 @@ namespace MaskedEmails.Inbox.Interop
 
         [Post("/emails/body")]
         [Headers("Authorization: Bearer")]
-        Task<InboxMessage> GetMessageBody([Body] string location);
+        Task<HttpContent> GetMessageBody([Body] string location, string view = null);
     }
 }

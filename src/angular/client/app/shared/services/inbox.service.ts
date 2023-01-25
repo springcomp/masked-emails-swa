@@ -26,7 +26,7 @@ export class InboxService {
   public getRawMessage(location: string): Observable<string> {
     const headers = { headers: this.helpers.getHeaders() };
     const requestUri = this.helpers.getRequestUri(
-      `/api/messages/my?location=${location}?view=source`
+      `/api/messages/my?location=${location}&view=source`
     );
     return this.http.get<string>(requestUri, headers);
   }

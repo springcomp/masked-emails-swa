@@ -22,7 +22,7 @@ describe('HashService.hashPassword', () => {
 
   it('should convert UTF-8 strings to byte array', () => {
     const hashService: HashService = TestBed.get(HashService);
-    const u = hashService.convertUtf8StringToByteArray('élément');
+    const u = hashService.convertUtf16StringToUint8Array('élément');
     expect(u.buffer).toEqual(
       new Uint8Array([195, 169, 108, 195, 169, 109, 101, 110, 116]).buffer
     );

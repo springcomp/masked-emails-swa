@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 
 import { MessageSpec, Message } from '@/models';
+import { InboxService } from '@/services';
 
 @Component({
   standalone: true,
@@ -28,6 +29,10 @@ export class MessageContentViewComponent {
 
   @Output() closeSidenav = new EventEmitter();
 
+  constructor(
+    private inboxService: InboxService
+  ){}
+
   public getMessageBody(): string {
     if (this.messageContent) {
       const html = this.messageContent.htmlBody;
@@ -35,6 +40,22 @@ export class MessageContentViewComponent {
 
       return html ?? text ?? '';
     }
+    return '';
+  }
+
+  public viewMessageSource(): string {
+    const location = this.messageContent!.location;
+    this.inboxService
+      .getRawMessage(location)
+      .subscribe((raw) => {
+        const blob = new Blob([raw], { type: 'content-type: application/octet-stream'});
+        var downloadURL = window.URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = "email.eml";
+        link.click();
+      });
+
     return '';
   }
 

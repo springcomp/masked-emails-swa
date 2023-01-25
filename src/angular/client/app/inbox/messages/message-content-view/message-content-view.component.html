@@ -6,6 +6,14 @@
       </h2>
       <button
         mat-icon-button
+        aria-label="Download"
+        (click)="viewMessageSource()"
+        class="source"
+      >
+        <fa-icon [icon]="['fas', 'download']"></fa-icon>
+      </button>
+      <button
+        mat-icon-button
         color="primary"
         aria-label="Close"
         (click)="close()"

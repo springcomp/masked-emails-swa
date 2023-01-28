@@ -22,6 +22,15 @@
     <td mat-cell *matCellDef="let address">
       <div class="actions-position">
         <button
+          mat-icon-button
+          aria-label="Send email"
+          (click)="$event.stopPropagation(); openSendEmailDialog(address)"
+        >
+          <fa-icon [icon]="['fas', 'envelope']"></fa-icon>
+        </button>
+      </div>
+      <div class="actions-position">
+        <button
           class="icon-float"
           mat-icon-button
           aria-label="Modify the masked email address"

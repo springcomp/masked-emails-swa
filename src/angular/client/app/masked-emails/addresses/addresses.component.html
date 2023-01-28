@@ -40,6 +40,7 @@
 <div class="mobile-view">
   <app-addresses-table-mobile-view
     [dataSource]="dataSource"
+    (sendEmail)="openSendEmailDialog($event)"
     (updateAddress)="openUpdateDialog($event)"
     (deleteAddress)="openRemoveDialog($event)"
     (checkAddress)="onToggleChecked($event)"

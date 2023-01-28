@@ -27,21 +27,36 @@
       />
     </mat-form-field>
 
-    <mat-tab-group>
-      <mat-tab label="Editor">
-        <mat-form-field class="full-width">
-          <markdown-editor
-            formControlName="markdown"
-            placeholder="Enter email text using Markdown syntax."
-            required
-          >
-          </markdown-editor>
-        </mat-form-field>
-      </mat-tab>
-      <mat-tab label="Preview">
-        <div [innerHTML]="renderMarkdown()"></div>
-      </mat-tab>
-    </mat-tab-group>
+    <div class="desktop-view">
+      <mat-tab-group>
+        <mat-tab label="Editor">
+          <mat-form-field class="full-width">
+            <markdown-editor
+              formControlName="markdown"
+              placeholder="Enter email text using Markdown syntax."
+              required
+            >
+            </markdown-editor>
+          </mat-form-field>
+        </mat-tab>
+        <mat-tab label="Preview">
+          <div [innerHTML]="renderMarkdown()"></div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+
+    <div class="mobile-view">
+      <mat-form-field class="full-width">
+        <mat-label>Subject</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          formControlName="markdown"
+          placeholder="Enter email text here."
+          required
+        ></textarea>
+      </mat-form-field>
+    </div>
   </form>
 </div>
 

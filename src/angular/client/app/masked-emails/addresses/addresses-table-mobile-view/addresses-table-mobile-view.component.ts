@@ -48,6 +48,7 @@ import { MaskedEmail } from '@/models';
 export class AddressesTableMobileViewComponent {
   @Input() dataSource!: MatTableDataSource<MaskedEmail>;
 
+  @Output() sendEmail = new EventEmitter<string>();
   @Output() updateAddress = new EventEmitter<MaskedEmail>();
   @Output() deleteAddress = new EventEmitter<MaskedEmail>();
   @Output() checkAddress = new EventEmitter();
@@ -72,6 +73,10 @@ export class AddressesTableMobileViewComponent {
 
   public openUpdateDialog(address: MaskedEmail) {
     this.updateAddress.emit(address);
+  }
+
+  public openSendEmailDialog(address: MaskedEmail) {
+    this.sendEmail.emit(address.emailAddress);
   }
 
   public openRemoveDialog(address: MaskedEmail) {

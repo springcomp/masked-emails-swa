@@ -5,7 +5,24 @@
   max-width: 800px;
   width: 100%;
 
+  min-height: calc(80vh);
+  height: auto;
+
   .full-width {
     width: 100%;
+  }
+}
+
+.mobile-view {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-view {
+    display: none;
+  }
+
+  .mobile-view {
+    display: block;
   }
 }

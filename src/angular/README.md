@@ -17,7 +17,7 @@ ng build
 ng serve
 ```
 
-- Download the [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) CLI tool.
+- Download the [Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/overview) [CLI tool](https://azure.github.io/static-web-apps-cli/docs/cli/swa/).
 - Open _a second_ terminal and serve the Static Web App.
 
 ```sh

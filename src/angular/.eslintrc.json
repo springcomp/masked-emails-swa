@@ -1,9 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -28,13 +32,22 @@
           }
         ],
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-unused-vars": ["error", { "args": "none"}],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "none"
+          }
+        ],
         "no-non-null-assertion": "off"
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
       "rules": {}
     }
   ]

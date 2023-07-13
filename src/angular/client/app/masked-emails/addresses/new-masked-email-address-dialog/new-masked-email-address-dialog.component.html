@@ -42,10 +42,9 @@
           [icon]="hidePassword ? ['fas', 'eye-slash'] : ['fas', 'eye']"
         ></fa-icon>
       </button>
-      <mat-hint *ngIf="showGeneratedPassword" align="end" class="timer-color"
-        >A new password has been generated automatically. Click to display it in
-        the remaining {{ timeLeft }} seconds.</mat-hint
-      >
+      <mat-hint align="end" class="timer-color">Creating new masked-email addresses is no longer supported. 😢
+        Please, head over to https://app.logins.website/ instead. 🍾🚀
+      </mat-hint>
       <mat-error *ngIf="addressForm.invalid">{{
         getErrorMessageForPassword()
       }}</mat-error>
@@ -57,7 +56,7 @@
   <button
     mat-stroked-button
     color="primary"
-    [disabled]="addressForm.invalid"
+    [disabled]=true
     (click)="createAddress()"
   >
     Create

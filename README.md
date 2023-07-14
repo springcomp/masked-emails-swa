@@ -1,3 +1,5 @@
+> **Deprecated** This repository is deprecated in favor of a more robust [SimpleLogin](https://simplelogin.io/) solution.
+
 # MaskedEmail
 
 This repository hosts the main application and API for the "masked emails".
